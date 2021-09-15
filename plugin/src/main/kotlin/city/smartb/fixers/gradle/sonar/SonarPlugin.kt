@@ -52,6 +52,7 @@ class SonarPlugin : Plugin<Project> {
 					property("sonar.projectName", fixers.bundle.name)
 					property("sonar.host.url", fixers.sonar.url)
 					property("sonar.login", fixers.sonar.login)
+					property ("detekt.sonar.kotlin.config.path", "${rootDir}/detekt.yml")
 
 					property("sonar.verbose", true)
 					property("sonar.coverage.jacoco.xmlReportPaths",

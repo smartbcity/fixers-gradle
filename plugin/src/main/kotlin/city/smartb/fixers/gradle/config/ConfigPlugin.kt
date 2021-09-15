@@ -17,7 +17,6 @@ class ConfigPlugin : Plugin<Project> {
 					}
 				}
 				extensions.fixers?.let { config ->
-					println("***************************************************")
 					println(config.bundle.name)
 					println(config.bundle.description)
 					println(config.bundle.version)
