@@ -1,10 +1,7 @@
 package city.smartb.fixers.gradle.dependencies
 
 object PluginVersions {
-	const val kotlin = "1.5.30"
-//	const val detekt = "1.18.1"
-//	const val dokka = "1.4.32"
-//	const val sonar = "3.3"
+	const val kotlin = "1.6.0"
 }
 
 object Versions {
@@ -12,7 +9,7 @@ object Versions {
 	const val junit = "5.7.0"
 	const val assertj = "3.15.0"
 
-	const val coroutines = "1.5.1"
+	const val coroutines = "1.5.2"
 	const val kserialization = "1.1.0"
 
 	const val d2 = "0.1.1-SNAPSHOT"
