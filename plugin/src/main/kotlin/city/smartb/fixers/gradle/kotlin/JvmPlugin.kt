@@ -1,6 +1,6 @@
 package city.smartb.fixers.gradle.kotlin
 
-import city.smartb.fixers.gradle.dependencies.Dependencies
+import city.smartb.gradle.dependencies.FixersDependencies
 import org.gradle.api.JavaVersion
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -30,11 +30,10 @@ class JvmPlugin : Plugin<Project> {
 
 		target.dependencies {
 			add("implementation", kotlin("reflect"))
-			Dependencies.jvm.coroutines.forEach {
-				add("implementation", kotlin("reflect"))
+			FixersDependencies.Jvm.Kotlin.coroutines{
+				add("implementation", it)
 			}
-
-			Dependencies.jvm.test.forEach {
+			FixersDependencies.Jvm.Test.junit{
 				add("testImplementation", it)
 			}
 		}

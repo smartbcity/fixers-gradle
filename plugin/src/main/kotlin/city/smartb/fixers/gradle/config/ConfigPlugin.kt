@@ -17,12 +17,12 @@ class ConfigPlugin : Plugin<Project> {
 					}
 				}
 				extensions.fixers?.let { config ->
-					println(config.bundle.name)
-					println(config.bundle.description)
-					println(config.bundle.version)
-					println(config.repository.id)
-					println(config.repository.name)
-					println("***************************************************")
+					logger.debug(config.bundle.name)
+					logger.debug(config.bundle.description)
+					logger.debug(config.bundle.version)
+					logger.debug(config.repository.id)
+					logger.debug(config.repository.name)
+					logger.debug("***************************************************")
 				}
 			}
 		}

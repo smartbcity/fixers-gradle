@@ -1,6 +1,6 @@
 package city.smartb.fixers.gradle.kotlin
 
-import city.smartb.fixers.gradle.dependencies.Dependencies
+import city.smartb.gradle.dependencies.FixersDependencies
 import org.gradle.api.Action
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -32,12 +32,11 @@ class MppPlugin : Plugin<Project> {
 			sourceSets {
 				maybeCreate("commonMain").dependencies {
 					implementation(kotlin("reflect"))
-					Dependencies.common.coroutines.forEach { api(it) }
-					Dependencies.common.kserialization.forEach { api(it) }
+					FixersDependencies.Common.Kotlin.coroutines(::api)
+					FixersDependencies.Common.Kotlin.serialization(::api)
 				}
 				maybeCreate("commonTest").dependencies {
-
-					Dependencies.common.test.forEach { implementation(it) }
+					FixersDependencies.Common.test(::implementation)
 				}
 			}
 		}
@@ -53,12 +52,12 @@ class MppPlugin : Plugin<Project> {
 			sourceSets.getByName("jvmMain") {
 				dependencies {
 					implementation(kotlin("reflect"))
-					Dependencies.jvm.coroutines.forEach { implementation(it) }
+					FixersDependencies.Jvm.Kotlin.coroutines(::implementation)
 				}
 			}
 			sourceSets.getByName("jvmTest") {
 				dependencies {
-					Dependencies.jvm.test.forEach { implementation(it) }
+					FixersDependencies.Jvm.Test.junit (::implementation)
 				}
 			}
 		}

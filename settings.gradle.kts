@@ -9,5 +9,5 @@ pluginManagement {
 	}
 }
 
-includeBuild("dependencies")
+include("dependencies")
 include("plugin")

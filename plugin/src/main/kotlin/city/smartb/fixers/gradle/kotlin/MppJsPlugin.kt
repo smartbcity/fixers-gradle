@@ -1,6 +1,6 @@
 package city.smartb.fixers.gradle.kotlin
 
-import city.smartb.fixers.gradle.dependencies.PluginVersions
+import city.smartb.gradle.dependencies.FixersPluginVersions
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
@@ -33,7 +33,7 @@ class MppJsPlugin : Plugin<Project> {
             }
             sourceSets.getByName("jsTest") {
                 dependencies {
-                    implementation("org.jetbrains.kotlin:kotlin-test-js:${PluginVersions.kotlin}")
+                    implementation("org.jetbrains.kotlin:kotlin-test-js:${FixersPluginVersions.kotlin}")
                 }
             }
         }

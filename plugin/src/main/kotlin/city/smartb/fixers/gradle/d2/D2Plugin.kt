@@ -1,7 +1,7 @@
 package city.smartb.fixers.gradle.d2
 
 import city.smartb.fixers.gradle.config.fixers
-import city.smartb.fixers.gradle.dependencies.Versions
+import city.smartb.gradle.dependencies.FixersVersions
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.dependencies
@@ -21,7 +21,7 @@ class D2Plugin : Plugin<Project> {
 			tasks {
 				register<org.jetbrains.dokka.gradle.DokkaTask>(DOKKA_STORYBOOK_PARTIAL) {
 					dependencies {
-						plugins("city.smartb.d2:dokka-storybook-plugin:${Versions.d2}")
+						plugins("city.smartb.d2:dokka-storybook-plugin:${FixersVersions.d2}")
 					}
 				}
 			}

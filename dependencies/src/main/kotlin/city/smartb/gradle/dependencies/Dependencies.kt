@@ -1,49 +1,104 @@
 package city.smartb.gradle.dependencies
 
-object PluginVersions {
-	const val kotlin = "1.5.30"
-//	const val detekt = "1.18.1"
-//	const val dokka = "1.4.32"
-//	const val sonar = "3.3"
+import org.gradle.api.artifacts.Dependency
+
+object FixersPluginVersions {
+	const val fixers = "experimental-SNAPSHOT"
+	const val kotlin = "1.6.0"
+	const val springBoot = "2.6.0"
+	const val npmPublish = "1.1.4"
+
 }
 
-object Versions {
+object FixersVersions {
 
-	const val junit = "5.7.0"
-	const val assertj = "3.15.0"
+	object Logging {
+		const val slf4j = "1.7.32"
+	}
 
-	const val coroutines = "1.5.1"
-	const val kserialization = "1.1.0"
+	object Spring {
+		const val boot = FixersPluginVersions.springBoot
+		const val data = FixersPluginVersions.springBoot
+		const val function = "3.1.5"
+	}
 
+	object Test {
+		const val cucumber = "7.0.0"
+		const val junit = "5.7.0"
+		const val junitPlateform = "1.8.1"
+		const val assertj = "3.15.0"
+	}
+
+	object Kotlin {
+		const val coroutines = "1.5.2"
+		const val serialization = "1.3.1"
+		const val ktor = "1.6.5"
+	}
+
+	const val s2 = FixersPluginVersions.fixers
+	const val f2 = FixersPluginVersions.fixers
 	const val d2 = "0.1.1-SNAPSHOT"
 }
 
-object Dependencies {
-	object jvm {
-		val coroutines = arrayOf(
-			"org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines}",
-			"org.jetbrains.kotlinx:kotlinx-coroutines-reactor:${Versions.coroutines}",
-			"org.jetbrains.kotlinx:kotlinx-coroutines-reactive:${Versions.coroutines}",
-			"org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:${Versions.coroutines}"
-		)
-		val test = arrayOf(
-			"org.junit.jupiter:junit-jupiter:${Versions.junit}",
-			"org.junit.jupiter:junit-jupiter-api:${Versions.junit}",
-			"org.assertj:assertj-core:${Versions.assertj}"
-		)
+object FixersDependencies {
+	object Jvm {
+		object Kotlin {
+			fun coroutines(scope: Scope) = scope.add(
+				"org.jetbrains.kotlinx:kotlinx-coroutines-core:${FixersVersions.Kotlin.coroutines}",
+				"org.jetbrains.kotlinx:kotlinx-coroutines-reactor:${FixersVersions.Kotlin.coroutines}",
+				"org.jetbrains.kotlinx:kotlinx-coroutines-reactive:${FixersVersions.Kotlin.coroutines}",
+			)
+
+			fun ktorClient(scope: Scope) = scope.add(
+				"io.ktor:ktor-client-core:${FixersVersions.Kotlin.ktor}",
+				"io.ktor:ktor-client-cio:${FixersVersions.Kotlin.ktor}",
+				"io.ktor:ktor-client-auth:${FixersVersions.Kotlin.ktor}",
+				"io.ktor:ktor-client-jackson:${FixersVersions.Kotlin.ktor}"
+			)
+
+			fun slf4j(scope: Scope) = scope.add(
+				"org.slf4j:slf4j-api:${FixersVersions.Logging.slf4j}"
+			)
+		}
+
+		object Test {
+			fun cucumber(scope: Scope) = scope.add(
+				"io.cucumber:cucumber-java8:${FixersVersions.Test.cucumber}",
+				"io.cucumber:cucumber-junit-platform-engine:${FixersVersions.Test.cucumber}",
+			)
+
+			fun junit(scope: Scope) = scope.add(
+				"org.junit.jupiter:junit-jupiter:${FixersVersions.Test.junit}",
+				"org.junit.jupiter:junit-jupiter-api:${FixersVersions.Test.junit}",
+				"org.junit.platform:junit-platform-suite:${FixersVersions.Test.junitPlateform}",
+				"org.assertj:assertj-core:${FixersVersions.Test.assertj}"
+			)
+		}
 	}
 
-	object common {
-		val coroutines = arrayOf(
-			"org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines}"
+
+	object Common {
+		fun test(scope: Scope) = scope.add(
+			"org.jetbrains.kotlin:kotlin-test-common:${FixersPluginVersions.kotlin}",
+			"org.jetbrains.kotlin:kotlin-test-annotations-common:${FixersPluginVersions.kotlin}"
 		)
-		val test =  arrayOf(
-			"org.jetbrains.kotlin:kotlin-test-common:${PluginVersions.kotlin}",
-			"org.jetbrains.kotlin:kotlin-test-annotations-common:${PluginVersions.kotlin}"
-		)
-		val kserialization = arrayOf(
-			"org.jetbrains.kotlinx:kotlinx-serialization-core:${Versions.kserialization}",
-			"org.jetbrains.kotlinx:kotlinx-serialization-json:${Versions.kserialization}"
-		)
+
+		object Kotlin {
+			fun coroutines(scope: Scope) = scope.add(
+				"org.jetbrains.kotlinx:kotlinx-coroutines-core:${FixersVersions.Kotlin.coroutines}"
+			)
+
+			fun serialization(scope: Scope) = scope.add(
+				"org.jetbrains.kotlinx:kotlinx-serialization-core:${FixersVersions.Kotlin.serialization}",
+				"org.jetbrains.kotlinx:kotlinx-serialization-json:${FixersVersions.Kotlin.serialization}"
+			)
+		}
 	}
+}
+
+typealias Scope = (dependencyNotation: Any) -> Dependency?
+
+fun Scope.add(vararg deps: String): Scope {
+	deps.forEach { this(it) }
+	return this
 }

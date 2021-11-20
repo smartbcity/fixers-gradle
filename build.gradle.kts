@@ -5,7 +5,6 @@ plugins {
 
 
 allprojects {
-	group = "city.smartb.fixers.gradle"
 	version = System.getenv("VERSION") ?: "latest"
 	repositories {
 		mavenCentral()

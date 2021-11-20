@@ -1,7 +1,6 @@
 plugins {
 	`kotlin-dsl`
 	`java-gradle-plugin`
-//	id("dependencies")
 	kotlin("jvm")
 	id("com.gradle.plugin-publish")
 	`maven-publish`
@@ -13,6 +12,9 @@ repositories {
 	mavenCentral()
 }
 
+group = "city.smartb.fixers.gradle"
+version = System.getenv("VERSION") ?: "latest"
+
 dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:${PluginVersions.kotlin}")
 	implementation("org.jetbrains.kotlin:kotlin-compiler-embeddable:${PluginVersions.kotlin}")
@@ -21,7 +23,7 @@ dependencies {
 	implementation("org.jetbrains.dokka:dokka-gradle-plugin:${PluginVersions.dokka}")
 	implementation("org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:${PluginVersions.sonarQube}")
 
-//	implementation("city.smartb.gradle.dependencies:dependencies:SNAPSHOT")
+	implementation(project(":dependencies"))
 }
 
 pluginBundle {
