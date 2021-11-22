@@ -24,7 +24,7 @@ object FixersVersions {
 
 	object Test {
 		const val cucumber = "7.0.0"
-		const val junit = "5.7.0"
+		const val junit = "5.8.1"
 		const val junitPlateform = "1.8.1"
 		const val assertj = "3.15.0"
 	}
