@@ -19,7 +19,7 @@ object FixersVersions {
 	object Spring {
 		const val boot = FixersPluginVersions.springBoot
 		const val data = FixersPluginVersions.springBoot
-		const val function = "3.2.1"
+		const val function = "3.1.5"
 	}
 
 	object Test {
@@ -35,7 +35,7 @@ object FixersVersions {
 		const val ktor = "1.6.5"
 	}
 
-	const val d2 = "0.1.1-SNAPSHOT"
+	const val d2 = "experimental-SNAPSHOT"
 }
 
 object FixersDependencies {
