@@ -28,10 +28,15 @@ subprojects {
 			}
 		}
 		extensions.getByType(PublishingExtension::class.java).apply {
+			val sonatypeUrl = if(System.getenv("VERSION").endsWith("-SNAPSHOT")) {
+				"https://oss.sonatype.org/content/repositories/snapshots/"
+			} else {
+				"https://oss.sonatype.org/service/local/staging/deploy/maven2"
+			}
 			repositories {
 				maven {
 					name = "sonatype"
-					url = uri("https://oss.sonatype.org/content/repositories/snapshots")
+					url = uri(sonatypeUrl)
 					credentials {
 						username = System.getenv("sonatypeUsername")
 						password = System.getenv("sonatypePassword")

@@ -20,7 +20,6 @@ class ConfigPlugin : Plugin<Project> {
 					logger.debug(config.bundle.name)
 					logger.debug(config.bundle.description)
 					logger.debug(config.bundle.version)
-					logger.debug(config.repository.id)
 					logger.debug(config.repository.name)
 					logger.debug("***************************************************")
 				}
