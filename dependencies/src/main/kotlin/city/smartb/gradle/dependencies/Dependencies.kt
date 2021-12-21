@@ -5,7 +5,7 @@ import org.gradle.api.artifacts.Dependency
 object FixersPluginVersions {
 	const val fixers = "experimental-SNAPSHOT"
 	const val kotlin = "1.6.10"
-	const val springBoot = "2.6.0"
+	const val springBoot = "2.6.1"
 	const val npmPublish = "1.1.4"
 
 }
@@ -18,8 +18,8 @@ object FixersVersions {
 
 	object Spring {
 		const val boot = FixersPluginVersions.springBoot
-		const val data = FixersPluginVersions.springBoot
-		const val function = "3.1.5"
+		const val data = "2.6.0"
+		const val function = "3.2.1"
 	}
 
 	object Test {
