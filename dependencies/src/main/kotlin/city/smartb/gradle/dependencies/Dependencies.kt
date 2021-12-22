@@ -3,11 +3,10 @@ package city.smartb.gradle.dependencies
 import org.gradle.api.artifacts.Dependency
 
 object FixersPluginVersions {
-	const val fixers = "0.2.0"
+	const val fixers = "experimental-SNAPSHOT"
 	const val kotlin = "1.6.10"
 	const val springBoot = "2.6.1"
 	const val npmPublish = "1.1.4"
-
 }
 
 object FixersVersions {
@@ -26,16 +25,16 @@ object FixersVersions {
 		const val cucumber = "7.0.0"
 		const val junit = "5.8.1"
 		const val junitPlateform = "1.8.1"
-		const val assertj = "3.15.0"
+		const val assertj = "3.21.0"
 	}
 
 	object Kotlin {
-		const val coroutines = "1.5.2"
+		const val coroutines = "1.6.0"
 		const val serialization = "1.3.1"
 		const val ktor = "1.6.7"
 	}
 
-	const val d2 = "0.2.0"
+	const val d2 = FixersPluginVersions.fixers
 }
 
 object FixersDependencies {
@@ -69,7 +68,8 @@ object FixersDependencies {
 				"org.junit.jupiter:junit-jupiter:${FixersVersions.Test.junit}",
 				"org.junit.jupiter:junit-jupiter-api:${FixersVersions.Test.junit}",
 				"org.junit.platform:junit-platform-suite:${FixersVersions.Test.junitPlateform}",
-				"org.assertj:assertj-core:${FixersVersions.Test.assertj}"
+				"org.assertj:assertj-core:${FixersVersions.Test.assertj}",
+				"org.jetbrains.kotlinx:kotlinx-coroutines-test:${FixersVersions.Kotlin.coroutines}"
 			)
 		}
 	}
@@ -78,7 +78,8 @@ object FixersDependencies {
 	object Common {
 		fun test(scope: Scope) = scope.add(
 			"org.jetbrains.kotlin:kotlin-test-common:${FixersPluginVersions.kotlin}",
-			"org.jetbrains.kotlin:kotlin-test-annotations-common:${FixersPluginVersions.kotlin}"
+			"org.jetbrains.kotlin:kotlin-test-annotations-common:${FixersPluginVersions.kotlin}",
+			"org.jetbrains.kotlinx:kotlinx-coroutines-test:${FixersVersions.Kotlin.coroutines}"
 		)
 
 		object Kotlin {

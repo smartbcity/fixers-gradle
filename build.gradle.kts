@@ -5,7 +5,7 @@ plugins {
 
 
 allprojects {
-	version = System.getenv("VERSION") ?: "latest"
+	version = System.getenv("VERSION") ?: "experimental-SNAPSHOT"
 	repositories {
 		mavenCentral()
 		gradlePluginPortal()
@@ -28,7 +28,7 @@ subprojects {
 			}
 		}
 		extensions.getByType(PublishingExtension::class.java).apply {
-			val sonatypeUrl = if(System.getenv("VERSION").endsWith("-SNAPSHOT")) {
+			val sonatypeUrl = if(project.version.toString().endsWith("-SNAPSHOT")) {
 				"https://oss.sonatype.org/content/repositories/snapshots/"
 			} else {
 				"https://oss.sonatype.org/service/local/staging/deploy/maven2"

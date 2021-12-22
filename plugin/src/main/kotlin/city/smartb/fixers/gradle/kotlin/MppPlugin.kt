@@ -20,9 +20,6 @@ class MppPlugin : Plugin<Project> {
 
 	private fun setupMultiplatformLibrary(target: Project) {
 		target.apply(plugin = "org.jetbrains.kotlin.multiplatform")
-		target.group = target.group
-		target.version = System.getenv("VERSION") ?: "latest"
-
 
 		target.tasks.withType<KotlinCompile>().configureEach {
 			kotlinOptions.freeCompilerArgs += "-Xopt-in=kotlin.js.ExperimentalJsExport"

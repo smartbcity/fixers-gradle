@@ -13,7 +13,6 @@ repositories {
 }
 
 group = "city.smartb.fixers.gradle"
-version = System.getenv("VERSION") ?: "latest"
 
 dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:${PluginVersions.kotlin}")

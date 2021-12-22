@@ -9,7 +9,6 @@ repositories {
 }
 
 group = "city.smartb.fixers"
-version = System.getenv("VERSION") ?: "latest"
 
 publishing {
     publications {
