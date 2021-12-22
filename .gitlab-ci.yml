@@ -1,0 +1,5 @@
+include:
+  - project: 'fixers/cicd'
+    file: '.gitlab-ci-fixers-base.yml'
+  - project: 'fixers/cicd'
+    file: '.gitlab-ci-fixers-libs.yml'
