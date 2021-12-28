@@ -1,1 +1,0 @@
-package city.smartb.fixers.gradle.config.model

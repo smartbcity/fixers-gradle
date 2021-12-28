@@ -32,8 +32,6 @@ object FixersVersions {
 		const val serialization = "1.3.1"
 		const val ktor = "1.6.7"
 	}
-
-	const val d2 = "0.2.0"
 }
 
 object FixersDependencies {

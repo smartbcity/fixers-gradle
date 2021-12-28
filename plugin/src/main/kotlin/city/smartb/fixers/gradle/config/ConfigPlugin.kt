@@ -1,5 +1,8 @@
 package city.smartb.fixers.gradle.config
 
+import city.smartb.gradle.config.ConfigExtension
+import city.smartb.gradle.config.fixers
+import city.smartb.gradle.config.fixersIfExists
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 
@@ -8,7 +11,7 @@ class ConfigPlugin : Plugin<Project> {
 		val mainConfig = target.createExtension()
 		target.allprojects {
 			target.afterEvaluate {
-				extensions.fixersIfExists {
+				extensions.fixersIfExists() {
 					extensions.configure(ConfigExtension::class.java) {
 						this.bundle = mainConfig.bundle
 						this.sonar = mainConfig.sonar

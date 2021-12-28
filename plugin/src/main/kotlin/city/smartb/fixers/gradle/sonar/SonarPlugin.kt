@@ -1,6 +1,6 @@
 package city.smartb.fixers.gradle.sonar
 
-import city.smartb.fixers.gradle.config.ConfigExtension
+import city.smartb.gradle.config.ConfigExtension
 import io.gitlab.arturbosch.detekt.extensions.DetektExtension
 import org.gradle.api.Plugin
 import org.gradle.api.Project

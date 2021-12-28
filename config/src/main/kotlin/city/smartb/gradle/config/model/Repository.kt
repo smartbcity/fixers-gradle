@@ -1,7 +1,6 @@
-package city.smartb.fixers.gradle.config.model
+package city.smartb.gradle.config.model
 
 import org.gradle.api.Project
-import org.gradle.internal.impldep.org.eclipse.jgit.lib.RepositoryBuilder
 import java.lang.System.getenv
 import java.net.URI
 

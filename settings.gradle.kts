@@ -9,5 +9,6 @@ pluginManagement {
 	}
 }
 
+include("config")
 include("dependencies")
 include("plugin")

@@ -1,12 +1,17 @@
-package city.smartb.fixers.gradle.config
+package city.smartb.gradle.config
 
-import city.smartb.fixers.gradle.config.model.*
-import org.gradle.api.Action
+import city.smartb.gradle.config.model.Bundle
+import city.smartb.gradle.config.model.Publication
+import city.smartb.gradle.config.model.Repository
+import city.smartb.gradle.config.model.Sonar
+import city.smartb.gradle.config.model.smartB
+import city.smartb.gradle.config.model.sonatype
 import org.gradle.api.Project
 import org.gradle.api.plugins.ExtensionContainer
 import org.gradle.api.publish.maven.MavenPom
 import org.gradle.plugin.use.PluginDependenciesSpec
 import org.gradle.plugin.use.PluginDependencySpec
+import org.gradle.api.Action
 
 /**
  * Retrieves the [fixers][city.smartb.fixers.gradle.fixers] extension.
@@ -17,6 +22,7 @@ val ExtensionContainer.fixers: ConfigExtension?
 	} catch (e: org.gradle.api.UnknownDomainObjectException) {
 		null
 	}
+
 /**
  * Configures the [fixers][city.smartb.fixers.gradle.fixers] extension.
  */
@@ -27,7 +33,7 @@ fun Project.fixers(configure: Action<ConfigExtension>): Unit =
  * Configures the [fixers][city.smartb.fixers.gradle.fixers] extension if exists.
  */
 fun ExtensionContainer.fixersIfExists(configure: Action<ConfigExtension>) {
-	if(fixers != null) {
+	if (fixers != null) {
 		configure(ConfigExtension.NAME, configure)
 	}
 }
@@ -36,7 +42,7 @@ fun PluginDependenciesSpec.fixers(module: String): PluginDependencySpec = id("ci
 
 
 open class ConfigExtension(
-	private val project: Project
+	val project: Project
 ) {
 	companion object {
 		const val NAME: String = "fixers"
@@ -51,16 +57,11 @@ open class ConfigExtension(
 	var publication: Publication? = null
 
 	var sonar: Sonar = Sonar.smartB(project)
-
-	var d2: D2 = D2(outputDirectory = project.file("storybook/stories/d2"))
+	var properties: MutableMap<String, Any> = mutableMapOf()
 
 	fun bundle(configure: Action<Bundle>) {
 		configure.execute(bundle)
 		publication(pom(bundle))
-	}
-
-	fun d2(configure: Action<D2>) {
-		configure.execute(d2)
 	}
 
 	fun sonar(configure: Action<Sonar>) {

@@ -23,6 +23,7 @@ dependencies {
 	implementation("org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:${PluginVersions.sonarQube}")
 
 	implementation(project(":dependencies"))
+	api(project(":config"))
 }
 
 pluginBundle {
@@ -38,12 +39,6 @@ gradlePlugin {
 			implementationClass = "city.smartb.fixers.gradle.config.ConfigPlugin"
 			displayName = "Fixers Gradle Config"
 			description = "Ease the configuration of Kotlin Fixers Project."
-		}
-		create("city.smartb.fixers.gradle.d2") {
-			id = "city.smartb.fixers.gradle.d2"
-			implementationClass = "city.smartb.fixers.gradle.d2.D2Plugin"
-			displayName = "Fixers Gradle d2"
-			description = "Ease the configuration of d2 in order to generate documentation for storybook."
 		}
 		create("city.smartb.fixers.gradle.dependencies") {
 			id = "city.smartb.fixers.gradle.dependencies"

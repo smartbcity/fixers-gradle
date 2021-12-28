@@ -1,8 +1,8 @@
 package city.smartb.fixers.gradle.publish
 
-import city.smartb.fixers.gradle.config.ConfigExtension
 import city.smartb.fixers.gradle.config.ConfigPlugin
-import city.smartb.fixers.gradle.config.fixers
+import city.smartb.gradle.config.ConfigExtension
+import city.smartb.gradle.config.fixers
 import java.lang.System.getenv
 import org.gradle.api.Plugin
 import org.gradle.api.Project

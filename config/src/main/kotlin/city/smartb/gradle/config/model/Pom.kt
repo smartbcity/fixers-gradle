@@ -1,0 +1,1 @@
+package city.smartb.gradle.config.model

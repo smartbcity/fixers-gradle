@@ -1,4 +1,4 @@
-package city.smartb.fixers.gradle.config.model
+package city.smartb.gradle.config.model
 
 data class Bundle(
 	var name: String,

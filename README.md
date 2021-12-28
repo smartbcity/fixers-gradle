@@ -5,9 +5,6 @@ Gradle's plugins to facilitate the configuration of kotlin modules.
 ## city.smartb.fixers.gradle.config
 Ease the configuration of Kotlin Fixers Project.
 
-## city.smartb.fixers.gradle.d2
-Ease the configuration of d2 in order to generate documentation for storybook.
-
 ## city.smartb.fixers.gradle.kotlin.jvm
 Ease the configuration of Kotlin Jvm Module.
 
