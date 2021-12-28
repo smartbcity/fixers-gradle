@@ -1,25 +1,16 @@
 plugins {
 	`kotlin-dsl`
-	`java-gradle-plugin`
 	kotlin("jvm")
 	id("com.gradle.plugin-publish")
-	`maven-publish`
-	signing
+//	`maven-publish`
+//	signing
 }
-
-repositories {
-	gradlePluginPortal()
-	mavenCentral()
-}
-
-group = "city.smartb.fixers.gradle"
 
 dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:${PluginVersions.kotlin}")
 	implementation("org.jetbrains.kotlin:kotlin-compiler-embeddable:${PluginVersions.kotlin}")
 
 	implementation("io.gitlab.arturbosch.detekt:detekt-gradle-plugin:${PluginVersions.detekt}")
-	implementation("org.jetbrains.dokka:dokka-gradle-plugin:${PluginVersions.dokka}")
 	implementation("org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:${PluginVersions.sonarQube}")
 
 	implementation(project(":dependencies"))
@@ -27,10 +18,11 @@ dependencies {
 }
 
 pluginBundle {
-	website = "https://smartb.city"
+	website = "https://github.com/smartbcity/fixers-gradle"
 	vcsUrl = "https://github.com/smartbcity/fixers-gradle"
 	tags = listOf("SmartB", "Fixers", "kotlin", "mpp", "jvm")
 }
+
 
 gradlePlugin {
 	plugins {
@@ -69,33 +61,7 @@ gradlePlugin {
 			implementationClass = "city.smartb.fixers.gradle.sonar.SonarPlugin"
 			displayName = "Fixers Gradle Sonar"
 			description = "Ease the configuration of static code analysis with sonarqube and detekt."
-		}
-	}
-}
 
-publishing {
-	publications {
-		create<MavenPublication>("mavenJava") {
-			from(project.components["kotlin"])
-			pom {
-				name.set(project.name)
-				description.set(project.description)
-
-				licenses {
-					license {
-						name.set("The Apache Software License, Version 2.0")
-						url.set("https://www.apache.org/licenses/LICENSE-2.0.txt")
-					}
-				}
-				developers {
-					developer {
-						id.set("SmartB")
-						name.set("SmartB Team")
-						organization.set("SmartB")
-						organizationUrl.set("https://www.smartb.city")
-					}
-				}
-			}
 		}
 	}
 }

@@ -1,0 +1,62 @@
+/*
+ * Copyright 2017-2020 JetBrains s.r.o. Use of this source code is governed by the Apache 2.0 license.
+ */
+
+// Configures publishing of Maven artifacts to Bintray
+
+apply plugin: 'java-library'
+apply plugin: 'maven-publish'
+apply plugin: 'signing'
+
+apply from: project.rootProject.file('gradle/pom.gradle')
+
+def sonatypeUsername = System.getenv("sonatypeUsername") ?: ""
+def sonatypePassword = System.getenv("sonatypePassword") ?: ""
+def signingKey = System.getenv("signingKey") ?: ""
+def signingPassword = System.getenv("signingPassword") ?: ""
+def releasesRepoUrl =  "https://oss.sonatype.org/service/local/staging/deploy/maven2"
+def snapshotsRepoUrl = "https://oss.sonatype.org/content/repositories/snapshots"
+def repoUrl = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
+
+println("///////////////////////////////////////////")
+println("Deploy to: $repoUrl with $sonatypeUsername" )
+println("///////////////////////////////////////////")
+
+task sourcesJar(type: Jar) {
+    from sourceSets.main.allJava
+    archiveClassifier = 'sources'
+}
+
+task javadocJar(type: Jar, dependsOn: 'javadoc') {
+    from javadoc.destinationDir
+    archiveClassifier = 'javadoc'
+}
+
+afterEvaluate { Project project ->
+    publishing {
+        publications {
+            mavenJava(MavenPublication) {
+                from components.java
+                artifact sourcesJar
+                artifact javadocJar
+                pom.withXml(configureMavenCentralMetadata)
+            }
+        }
+        repositories {
+            maven {
+                url = repoUrl
+                credentials {
+                    username sonatypeUsername
+                    password sonatypePassword
+                }
+            }
+        }
+    }
+    signing {
+        def key = signingKey
+        def password = signingPassword
+        useInMemoryPgpKeys(key, password)
+        sign publishing.publications.mavenJava
+    }
+
+}

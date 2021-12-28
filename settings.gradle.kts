@@ -4,8 +4,10 @@ rootProject.name = "fixers-gradle"
 
 pluginManagement {
 	repositories {
-		maven(url = "../local-plugin-repository")
 		gradlePluginPortal()
+		maven {
+			url = uri("https://plugins.gradle.org/m2/")
+		}
 	}
 }
 
