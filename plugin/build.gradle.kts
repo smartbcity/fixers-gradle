@@ -61,7 +61,8 @@ gradlePlugin {
 			implementationClass = "city.smartb.fixers.gradle.sonar.SonarPlugin"
 			displayName = "Fixers Gradle Sonar"
 			description = "Ease the configuration of static code analysis with sonarqube and detekt."
-
 		}
 	}
 }
+
+apply(from = rootProject.file("gradle/publishing.gradle"))
