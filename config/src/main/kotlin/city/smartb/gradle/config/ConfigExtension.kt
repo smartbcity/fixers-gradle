@@ -82,6 +82,9 @@ fun pom(bundle: Bundle): Action<MavenPom> = Action {
 	description.set(bundle.description)
 	url.set(bundle.url)
 
+	this.scm {
+		url.set(bundle.url)
+	}
 	licenses {
 		license {
 			name.set("The Apache Software License, Version 2.0")
@@ -96,5 +99,4 @@ fun pom(bundle: Bundle): Action<MavenPom> = Action {
 			organizationUrl.set("https://www.smartb.city")
 		}
 	}
-
 }

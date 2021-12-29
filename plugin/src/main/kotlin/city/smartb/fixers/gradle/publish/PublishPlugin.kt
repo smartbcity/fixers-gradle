@@ -3,26 +3,26 @@ package city.smartb.fixers.gradle.publish
 import city.smartb.fixers.gradle.config.ConfigPlugin
 import city.smartb.gradle.config.ConfigExtension
 import city.smartb.gradle.config.fixers
-import java.lang.System.getenv
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.gradle.api.plugins.JavaPluginExtension
 import org.gradle.api.publish.PublishingExtension
 import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.api.publish.maven.plugins.MavenPublishPlugin
-import org.gradle.kotlin.dsl.create
+import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.get
 import org.gradle.plugins.signing.SigningExtension
 import org.gradle.plugins.signing.SigningPlugin
+import java.lang.System.getenv
 
 class PublishPlugin : Plugin<Project> {
 
 	override fun apply(target: Project) {
-		target.plugins.apply(ConfigPlugin::class.java)
 		target.plugins.apply(MavenPublishPlugin::class.java)
+		target.plugins.apply(ConfigPlugin::class.java)
 		target.logger.info("Apply PublishPlugin to ${target.name}")
 		target.afterEvaluate {
-			extensions.fixers?.let { fixersConfig ->
+			val fixers = target.extensions.fixers
+			fixers?.let { fixersConfig ->
 				setupPublishing(fixersConfig)
 				setupSign()
 			}
@@ -33,7 +33,6 @@ class PublishPlugin : Plugin<Project> {
 		val publishing = project.extensions.getByType(PublishingExtension::class.java)
 		val publication = fixersConfig.publication
 		val repository = fixersConfig.repository
-
 		publishing.repositories {
 			maven {
 				name = repository.name
@@ -44,13 +43,20 @@ class PublishPlugin : Plugin<Project> {
 				}
 			}
 		}
-		extensions.findByType(JavaPluginExtension::class.java)?.let {
-			publishing.publications {
-				create<MavenPublication>("") {
-					from(project.components["kotlin"])
-					publication?.let { pom(publication.configure) }
-				}
+
+		configure<PublishingExtension> {
+			publications.all {
+				val mavenPublication = this as? MavenPublication
+				mavenPublication?.artifactId =
+					"${project.name}${"-$name".takeUnless { "kotlinMultiplatform" in name }.orEmpty()}"
 			}
+		}
+		val variantName = project.name
+		publishing.publications.withType(MavenPublication::class.java) {
+			val type = name
+			artifactId = "$variantName-$type"
+			publication?.let { pom(publication.configure) }
+			artifact(tasks["javadocJar"])
 		}
 	}
 
@@ -70,5 +76,4 @@ class PublishPlugin : Plugin<Project> {
 			)
 		}
 	}
-
 }

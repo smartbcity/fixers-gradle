@@ -4,9 +4,15 @@ import city.smartb.gradle.dependencies.FixersDependencies
 import org.gradle.api.Action
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.api.tasks.SourceSetContainer
+import org.gradle.api.tasks.TaskProvider
+import org.gradle.jvm.tasks.Jar
 import org.gradle.kotlin.dsl.apply
+import org.gradle.kotlin.dsl.get
+import org.gradle.kotlin.dsl.getting
 import org.gradle.kotlin.dsl.invoke
 import org.gradle.kotlin.dsl.withType
+import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
@@ -16,6 +22,7 @@ class MppPlugin : Plugin<Project> {
 		setupMultiplatformLibrary(target)
 		setupJvmTarget(target)
 		setupJsTarget(target)
+		target.setupMppPublishJar()
 	}
 
 	private fun setupMultiplatformLibrary(target: Project) {
@@ -67,4 +74,16 @@ class MppPlugin : Plugin<Project> {
 	private fun Project.kotlin(action: Action<KotlinMultiplatformExtension>) {
 		extensions.configure(KotlinMultiplatformExtension::class.java, action)
 	}
+
+	private fun Project.setupMppPublishJar() {
+		plugins.withType(MppPlugin::class.java).whenPluginAdded {
+			tasks.register("javadocJar", Jar::class.java) {
+				archiveClassifier.set("javadoc")
+			}
+			tasks.register("sourcesJar", Jar::class.java) {
+				archiveClassifier.set("sources")
+			}
+		}
+	}
+
 }

@@ -11,7 +11,7 @@ class ConfigPlugin : Plugin<Project> {
 		val mainConfig = target.createExtension()
 		target.allprojects {
 			target.afterEvaluate {
-				extensions.fixersIfExists() {
+				extensions.fixersIfExists {
 					extensions.configure(ConfigExtension::class.java) {
 						this.bundle = mainConfig.bundle
 						this.sonar = mainConfig.sonar
@@ -20,6 +20,7 @@ class ConfigPlugin : Plugin<Project> {
 					}
 				}
 				extensions.fixers?.let { config ->
+					logger.debug("Fixers Configuration")
 					logger.debug(config.bundle.name)
 					logger.debug(config.bundle.description)
 					logger.debug(config.bundle.version)
