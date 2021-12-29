@@ -2,8 +2,6 @@ plugins {
 	`kotlin-dsl`
 	kotlin("jvm")
 	id("com.gradle.plugin-publish")
-//	`maven-publish`
-//	signing
 }
 
 dependencies {
@@ -13,7 +11,7 @@ dependencies {
 	implementation("io.gitlab.arturbosch.detekt:detekt-gradle-plugin:${PluginVersions.detekt}")
 	implementation("org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:${PluginVersions.sonarQube}")
 
-	implementation(project(":dependencies"))
+	api(project(":dependencies"))
 	api(project(":config"))
 }
 
@@ -21,8 +19,10 @@ pluginBundle {
 	website = "https://github.com/smartbcity/fixers-gradle"
 	vcsUrl = "https://github.com/smartbcity/fixers-gradle"
 	tags = listOf("SmartB", "Fixers", "kotlin", "mpp", "jvm")
+	mavenCoordinates {
+		groupId = "city.smartb.fixers.gradle"
+	}
 }
-
 
 gradlePlugin {
 	plugins {
