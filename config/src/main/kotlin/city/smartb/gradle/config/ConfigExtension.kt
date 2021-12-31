@@ -1,6 +1,7 @@
 package city.smartb.gradle.config
 
 import city.smartb.gradle.config.model.Bundle
+import city.smartb.gradle.config.model.Jdk
 import city.smartb.gradle.config.model.Publication
 import city.smartb.gradle.config.model.Repository
 import city.smartb.gradle.config.model.Sonar
@@ -52,6 +53,10 @@ open class ConfigExtension(
 		name = project.name
 	)
 
+	var jdk: Jdk = Jdk(
+		version = 11
+	)
+
 	var repository: Repository = Repository.sonatype(project)
 
 	var publication: Publication? = null
@@ -66,6 +71,10 @@ open class ConfigExtension(
 
 	fun sonar(configure: Action<Sonar>) {
 		configure.execute(sonar)
+	}
+
+	fun jdk(configure: Action<Jdk>) {
+		configure.execute(jdk)
 	}
 
 	fun publication(configure: Action<MavenPom>) {
