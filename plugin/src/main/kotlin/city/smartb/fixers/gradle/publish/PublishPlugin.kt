@@ -43,21 +43,23 @@ class PublishPlugin : Plugin<Project> {
 				}
 			}
 		}
-
+		val variantName = project.name
 		configure<PublishingExtension> {
 			publications.all {
 				val mavenPublication = this as? MavenPublication
-				mavenPublication?.artifactId =
-					"${project.name}${"-$name".takeUnless { "kotlinMultiplatform" in name }.orEmpty()}"
+				mavenPublication?.artifactId = getArtifactId(variantName, name)
+				publication?.let { mavenPublication?.pom(publication.configure) }
+				mavenPublication?.artifact(tasks["javadocJar"])
 			}
 		}
-		val variantName = project.name
-		publishing.publications.withType(MavenPublication::class.java) {
-			val type = name
-			artifactId = "$variantName-$type"
-			publication?.let { pom(publication.configure) }
-			artifact(tasks["javadocJar"])
-		}
+//		publishing.publications.withType(MavenPublication::class.java) {
+//			publication?.let { pom(publication.configure) }
+//			artifact(tasks["javadocJar"])
+//		}
+	}
+
+	internal fun getArtifactId(projectName: String, publicationName: String): String {
+		return "${projectName}${"-$publicationName".takeUnless { "kotlinMultiplatform" in publicationName }.orEmpty()}"
 	}
 
 	private fun Project.setupSign() {

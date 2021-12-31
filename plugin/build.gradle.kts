@@ -14,6 +14,12 @@ dependencies {
 
 	api(project(":dependencies"))
 	api(project(":config"))
+
+
+	testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
+	testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.1")
+	testImplementation("org.assertj:assertj-core:3.21.0")
+
 }
 
 pluginBundle {
@@ -67,3 +73,7 @@ gradlePlugin {
 }
 
 apply(from = rootProject.file("gradle/publishing.gradle"))
+
+tasks.withType<Test> {
+	useJUnitPlatform()
+}
