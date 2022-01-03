@@ -3,7 +3,7 @@ package city.smartb.fixers.gradle.publish
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
 
-internal class PublishPluginTest {
+internal class PublishMppPluginTest {
 
 
 	@Test
@@ -15,7 +15,7 @@ internal class PublishPluginTest {
 		)
 
 		values.forEach { (publication, expected) ->
-			val result = PublishPlugin().getArtifactId(projectName, publication)
+			val result = PublishMppPlugin.getArtifactId(projectName, publication)
 			Assertions.assertThat(result).isEqualTo(expected)
 
 		}

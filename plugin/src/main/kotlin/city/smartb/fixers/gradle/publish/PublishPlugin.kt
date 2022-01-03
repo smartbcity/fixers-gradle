@@ -6,10 +6,7 @@ import city.smartb.gradle.config.fixers
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.publish.PublishingExtension
-import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.api.publish.maven.plugins.MavenPublishPlugin
-import org.gradle.kotlin.dsl.configure
-import org.gradle.kotlin.dsl.get
 import org.gradle.plugins.signing.SigningExtension
 import org.gradle.plugins.signing.SigningPlugin
 import java.lang.System.getenv
@@ -43,23 +40,8 @@ class PublishPlugin : Plugin<Project> {
 				}
 			}
 		}
-		val variantName = project.name
-		configure<PublishingExtension> {
-			publications.all {
-				val mavenPublication = this as? MavenPublication
-				mavenPublication?.artifactId = getArtifactId(variantName, name)
-				publication?.let { mavenPublication?.pom(publication.configure) }
-				mavenPublication?.artifact(tasks["javadocJar"])
-			}
-		}
-//		publishing.publications.withType(MavenPublication::class.java) {
-//			publication?.let { pom(publication.configure) }
-//			artifact(tasks["javadocJar"])
-//		}
-	}
-
-	internal fun getArtifactId(projectName: String, publicationName: String): String {
-		return "${projectName}${"-$publicationName".takeUnless { "kotlinMultiplatform" in publicationName }.orEmpty()}"
+		PublishMppPlugin.setupMppPublish(this, publication)
+		PublishJvmPlugin.setupJVMPublish(this, publication)
 	}
 
 	private fun Project.setupSign() {

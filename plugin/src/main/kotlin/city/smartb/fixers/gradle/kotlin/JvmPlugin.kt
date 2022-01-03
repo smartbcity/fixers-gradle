@@ -21,7 +21,6 @@ class JvmPlugin : Plugin<Project> {
 
 	override fun apply(target: Project) {
 		configureJvmCompilation(target)
-		target.setupJvmPublishJar()
 	}
 
 	private fun configureJvmCompilation(target: Project) {
@@ -59,20 +58,5 @@ class JvmPlugin : Plugin<Project> {
 		}
 
 	}
-	private fun Project.setupJvmPublishJar() {
-		plugins.withType(JvmPlugin::class.java).whenPluginAdded {
-			tasks.register("javadocJar", Jar::class.java) {
-				val javadoc = tasks.named("javadoc")
-				dependsOn.add(javadoc)
-				archiveClassifier.set("javadoc")
-				from(javadoc)
-			}
 
-			tasks.register("sourcesJar", Jar::class.java) {
-				archiveClassifier.set("sources")
-				val sourceSets = project.properties["sourceSets"] as SourceSetContainer
-				from(sourceSets["main"].allSource)
-			}
-		}
-	}
 }
