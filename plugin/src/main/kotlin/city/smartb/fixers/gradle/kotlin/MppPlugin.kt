@@ -28,7 +28,7 @@ class MppPlugin : Plugin<Project> {
 		target.extensions.configure(KotlinMultiplatformExtension::class.java) {
 			sourceSets {
 				maybeCreate("commonMain").dependencies {
-					implementation(kotlin("reflect"))
+					FixersDependencies.Common.Kotlin.reflect(::api)
 					FixersDependencies.Common.Kotlin.coroutines(::api)
 					FixersDependencies.Common.Kotlin.serialization(::api)
 				}
@@ -48,7 +48,7 @@ class MppPlugin : Plugin<Project> {
 			}
 			sourceSets.getByName("jvmMain") {
 				dependencies {
-					implementation(kotlin("reflect"))
+					FixersDependencies.Common.Kotlin.reflect(::api)
 					FixersDependencies.Jvm.Kotlin.coroutines(::implementation)
 				}
 			}

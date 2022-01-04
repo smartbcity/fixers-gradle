@@ -9,7 +9,6 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-compiler-embeddable:${PluginVersions.kotlin}")
 
 	implementation("io.gitlab.arturbosch.detekt:detekt-gradle-plugin:${PluginVersions.detekt}")
-	implementation("org.jetbrains.dokka:dokka-gradle-plugin:${PluginVersions.kotlin}")
 	implementation("org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:${PluginVersions.sonarQube}")
 
 	api(project(":dependencies"))

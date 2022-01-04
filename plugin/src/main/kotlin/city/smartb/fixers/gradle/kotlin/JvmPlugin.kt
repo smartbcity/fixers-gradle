@@ -44,7 +44,9 @@ class JvmPlugin : Plugin<Project> {
 		}
 
 		target.dependencies {
-			add("implementation", kotlin("reflect"))
+			FixersDependencies.Jvm.Kotlin.reflect{
+				add("implementation", it)
+			}
 			FixersDependencies.Jvm.Kotlin.coroutines{
 				add("implementation", it)
 			}

@@ -3,9 +3,8 @@ package city.smartb.gradle.dependencies
 import org.gradle.api.artifacts.Dependency
 
 object FixersPluginVersions {
-	const val kotlin = "1.6.10"
-	const val springBoot = "2.6.1"
-	const val npmPublish = "1.1.4"
+	const val kotlin = "1.5.32"
+	const val springBoot = "2.3.4.RELEASE"
 }
 
 object FixersVersions {
@@ -16,8 +15,7 @@ object FixersVersions {
 
 	object Spring {
 		const val boot = FixersPluginVersions.springBoot
-		const val data = "2.6.0"
-		const val function = "3.2.1"
+		const val data = FixersPluginVersions.springBoot
 	}
 
 	object Test {
@@ -28,15 +26,18 @@ object FixersVersions {
 	}
 
 	object Kotlin {
-		const val coroutines = "1.6.0"
-		const val serialization = "1.3.1"
-		const val ktor = "1.6.7"
+		const val coroutines = "1.4.2"
+		const val serialization = "1.0.0"
+		const val ktor = "1.4.1"
 	}
 }
 
 object FixersDependencies {
 	object Jvm {
 		object Kotlin {
+			fun reflect(scope: Scope) = scope.add(
+				"org.jetbrains.kotlin:kotlin-reflect:${FixersPluginVersions.kotlin}",
+			)
 			fun coroutines(scope: Scope) = scope.add(
 				"org.jetbrains.kotlinx:kotlinx-coroutines-core:${FixersVersions.Kotlin.coroutines}",
 				"org.jetbrains.kotlinx:kotlinx-coroutines-reactor:${FixersVersions.Kotlin.coroutines}",
@@ -66,7 +67,6 @@ object FixersDependencies {
 				"org.junit.jupiter:junit-jupiter-api:${FixersVersions.Test.junit}",
 				"org.junit.platform:junit-platform-suite:${FixersVersions.Test.junitPlateform}",
 				"org.assertj:assertj-core:${FixersVersions.Test.assertj}",
-				"org.jetbrains.kotlinx:kotlinx-coroutines-test:${FixersVersions.Kotlin.coroutines}"
 			)
 		}
 	}
@@ -76,14 +76,15 @@ object FixersDependencies {
 		fun test(scope: Scope) = scope.add(
 			"org.jetbrains.kotlin:kotlin-test-common:${FixersPluginVersions.kotlin}",
 			"org.jetbrains.kotlin:kotlin-test-annotations-common:${FixersPluginVersions.kotlin}",
-			"org.jetbrains.kotlinx:kotlinx-coroutines-test:${FixersVersions.Kotlin.coroutines}"
 		)
 
 		object Kotlin {
+			fun reflect(scope: Scope) = scope.add(
+				"org.jetbrains.kotlin:kotlin-reflect:${FixersPluginVersions.kotlin}",
+			)
 			fun coroutines(scope: Scope) = scope.add(
 				"org.jetbrains.kotlinx:kotlinx-coroutines-core:${FixersVersions.Kotlin.coroutines}"
 			)
-
 			fun serialization(scope: Scope) = scope.add(
 				"org.jetbrains.kotlinx:kotlinx-serialization-core:${FixersVersions.Kotlin.serialization}",
 				"org.jetbrains.kotlinx:kotlinx-serialization-json:${FixersVersions.Kotlin.serialization}"
