@@ -39,7 +39,7 @@ object PublishJvmPlugin {
 
 	internal fun getArtifactId(projectName: String, publicationName: String): String {
 		if(publicationName.endsWith("PluginMarkerMaven")) {
-			return publicationName.replace("PluginMarkerMaven", "")
+			return publicationName.replace("PluginMarkerMaven", ".gradle.plugin")
 		}
 		return projectName
 	}
