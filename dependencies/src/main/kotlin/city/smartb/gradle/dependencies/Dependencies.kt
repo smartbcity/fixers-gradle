@@ -71,7 +71,6 @@ object FixersDependencies {
 		}
 	}
 
-
 	object Common {
 		fun test(scope: Scope) = scope.add(
 			"org.jetbrains.kotlin:kotlin-test-common:${FixersPluginVersions.kotlin}",
