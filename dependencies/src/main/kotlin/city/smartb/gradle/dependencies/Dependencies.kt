@@ -3,8 +3,8 @@ package city.smartb.gradle.dependencies
 import org.gradle.api.artifacts.Dependency
 
 object FixersPluginVersions {
-	const val kotlin = "1.6.20-M1"
-	const val springBoot = "2.6.3"
+	const val kotlin = "1.6.20-RC"
+	const val springBoot = "2.6.4"
 	const val npmPublish = "1.1.4"
 }
 
@@ -17,13 +17,14 @@ object FixersVersions {
 	object Spring {
 		const val boot = FixersPluginVersions.springBoot
 		const val data = FixersPluginVersions.springBoot
-		const val function = "3.2.1"
+		const val function = "3.2.2"
+		const val framework = "5.3.16"
 	}
 
 	object Test {
 		const val cucumber = "7.2.3"
 		const val junit = "5.8.2"
-		const val junitPlateform = "1.8.2"
+		const val junitPlatform = "1.8.2"
 		const val assertj = "3.22.0"
 	}
 
@@ -64,7 +65,7 @@ object FixersDependencies {
 			fun junit(scope: Scope) = scope.add(
 				"org.junit.jupiter:junit-jupiter:${FixersVersions.Test.junit}",
 				"org.junit.jupiter:junit-jupiter-api:${FixersVersions.Test.junit}",
-				"org.junit.platform:junit-platform-suite:${FixersVersions.Test.junitPlateform}",
+				"org.junit.platform:junit-platform-suite:${FixersVersions.Test.junitPlatform}",
 				"org.assertj:assertj-core:${FixersVersions.Test.assertj}",
 				"org.jetbrains.kotlinx:kotlinx-coroutines-test:${FixersVersions.Kotlin.coroutines}"
 			)

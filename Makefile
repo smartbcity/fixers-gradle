@@ -1,4 +1,3 @@
-test: test-mobi-rest
 
 libs: package-libs
 
