@@ -5,20 +5,26 @@ import org.gradle.api.artifacts.Dependency
 object FixersPluginVersions {
 	const val kotlin = "1.6.20-RC"
 	const val springBoot = "2.6.4"
-	const val npmPublish = "1.1.4"
+	const val npmPublish = "2.1.2"
+	const val ksp = "1.6.20-RC-1.0.4"
+
+	val fixers = FixersPluginVersions::class.java.`package`.implementationVersion!!
 }
 
 object FixersVersions {
-
 	object Logging {
 		const val slf4j = "1.7.36"
 	}
 
 	object Spring {
 		const val boot = FixersPluginVersions.springBoot
-		const val data = FixersPluginVersions.springBoot
-		const val function = "3.2.2"
+		const val data = "2.6.2"
 		const val framework = "5.3.16"
+		const val javaxPersistence = "2.2"
+	}
+
+	object Json {
+		const val jacksonKotlin = "2.13.1"
 	}
 
 	object Test {
@@ -26,6 +32,7 @@ object FixersVersions {
 		const val junit = "5.8.2"
 		const val junitPlatform = "1.8.2"
 		const val assertj = "3.22.0"
+		const val testcontainers = "1.16.3"
 	}
 
 	object Kotlin {
@@ -37,6 +44,36 @@ object FixersVersions {
 
 object FixersDependencies {
 	object Jvm {
+		object Json {
+			fun jackson(scope: Scope) = scope.add(
+				"com.fasterxml.jackson.module:jackson-module-kotlin:${FixersVersions.Json.jacksonKotlin}"
+			)
+			fun kSerialization(scope: Scope) = Common.Kotlin.serialization(scope).also {
+
+			}
+		}
+
+		object Logging {
+			fun slf4j(scope: Scope) = scope.add(
+				"org.slf4j:slf4j-api:${FixersVersions.Logging.slf4j}"
+			)
+		}
+
+		object Spring {
+			fun dataCommons(scope: Scope) = scope.add(
+				"javax.persistence:javax.persistence-api:${FixersVersions.Spring.javaxPersistence}",
+				"org.springframework:spring-context:${FixersVersions.Spring.framework}",
+				"org.springframework.data:spring-data-commons:${FixersVersions.Spring.data}"
+			)
+			fun autoConfigure(scope: Scope, ksp: Scope) = scope.add(
+				"org.springframework.boot:spring-boot-autoconfigure:${FixersVersions.Spring.boot}"
+			).also {
+				ksp.add(
+					"org.springframework.boot:spring-boot-configuration-processor:${FixersVersions.Spring.boot}"
+				)
+			}
+		}
+
 		object Kotlin {
 			fun coroutines(scope: Scope) = scope.add(
 				"org.jetbrains.kotlinx:kotlinx-coroutines-core:${FixersVersions.Kotlin.coroutines}",
@@ -49,10 +86,6 @@ object FixersDependencies {
 				"io.ktor:ktor-client-cio:${FixersVersions.Kotlin.ktor}",
 				"io.ktor:ktor-client-auth:${FixersVersions.Kotlin.ktor}",
 				"io.ktor:ktor-client-jackson:${FixersVersions.Kotlin.ktor}"
-			)
-
-			fun slf4j(scope: Scope) = scope.add(
-				"org.slf4j:slf4j-api:${FixersVersions.Logging.slf4j}"
 			)
 		}
 

@@ -19,6 +19,14 @@ subprojects {
 			toolchain.languageVersion.set(JavaLanguageVersion.of(11))
 		}
 	}
+	tasks.withType<Jar> {
+		manifest {
+			attributes(
+				"Implementation-Title" to project.name,
+				"Implementation-Version" to project.version
+			)
+		}
+	}
 	tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
 		kotlinOptions {
 			freeCompilerArgs = listOf("-Xjsr305=strict")
