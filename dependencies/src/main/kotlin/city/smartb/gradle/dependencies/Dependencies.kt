@@ -4,9 +4,9 @@ import org.gradle.api.artifacts.Dependency
 
 object FixersPluginVersions {
 	const val kotlin = "1.6.20-RC2"
-	const val springBoot = "2.6.4"
+	const val springBoot = "2.6.6"
 	const val npmPublish = "2.1.2"
-	const val ksp = "1.6.20-RC-1.0.4"
+	const val ksp = "1.6.20-RC2-1.0.4"
 
 	val fixers = FixersPluginVersions::class.java.`package`.implementationVersion!!
 }
@@ -19,12 +19,12 @@ object FixersVersions {
 	object Spring {
 		const val boot = FixersPluginVersions.springBoot
 		const val data = "2.6.3"
-		const val framework = "5.3.17"
+		const val framework = "5.3.18"
 		const val javaxPersistence = "2.2"
 	}
 
 	object Json {
-		const val jacksonKotlin = "2.13.1"
+		const val jacksonKotlin = "2.13.2"
 	}
 
 	object Test {
