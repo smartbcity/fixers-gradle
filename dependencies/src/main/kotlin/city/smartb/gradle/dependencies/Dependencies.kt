@@ -3,10 +3,10 @@ package city.smartb.gradle.dependencies
 import org.gradle.api.artifacts.Dependency
 
 object FixersPluginVersions {
-	const val kotlin = "1.6.20"
-	const val springBoot = "2.6.6"
+	const val kotlin = "1.6.21"
+	const val springBoot = "2.6.7"
 	const val npmPublish = "2.1.2"
-	const val ksp = "1.6.20-1.0.5"
+	const val ksp = "1.6.21-1.0.5"
 
 	val fixers = FixersPluginVersions::class.java.`package`.implementationVersion!!
 }
@@ -38,7 +38,6 @@ object FixersVersions {
 	object Kotlin {
 		const val coroutines = "1.6.1"
 		const val serialization = "1.3.2"
-		const val ktor = "2.0.0"
 	}
 }
 
@@ -48,9 +47,7 @@ object FixersDependencies {
 			fun jackson(scope: Scope) = scope.add(
 				"com.fasterxml.jackson.module:jackson-module-kotlin:${FixersVersions.Json.jacksonKotlin}"
 			)
-			fun kSerialization(scope: Scope) = Common.Kotlin.serialization(scope).also {
-
-			}
+			fun kSerialization(scope: Scope) = Common.Kotlin.serialization(scope)
 		}
 
 		object Logging {
@@ -79,13 +76,6 @@ object FixersDependencies {
 				"org.jetbrains.kotlinx:kotlinx-coroutines-core:${FixersVersions.Kotlin.coroutines}",
 				"org.jetbrains.kotlinx:kotlinx-coroutines-reactor:${FixersVersions.Kotlin.coroutines}",
 				"org.jetbrains.kotlinx:kotlinx-coroutines-reactive:${FixersVersions.Kotlin.coroutines}",
-			)
-
-			fun ktorClient(scope: Scope) = scope.add(
-				"io.ktor:ktor-client-core:${FixersVersions.Kotlin.ktor}",
-				"io.ktor:ktor-client-cio:${FixersVersions.Kotlin.ktor}",
-				"io.ktor:ktor-client-auth:${FixersVersions.Kotlin.ktor}",
-				"io.ktor:ktor-client-jackson:${FixersVersions.Kotlin.ktor}"
 			)
 		}
 
