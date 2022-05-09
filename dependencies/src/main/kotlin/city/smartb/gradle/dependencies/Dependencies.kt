@@ -18,7 +18,7 @@ object FixersVersions {
 
 	object Spring {
 		const val boot = FixersPluginVersions.springBoot
-		const val data = "2.6.3"
+		const val data = "2.6.4"
 		const val framework = "5.3.19"
 		const val javaxPersistence = "2.2"
 	}
