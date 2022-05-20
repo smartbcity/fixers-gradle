@@ -12,10 +12,20 @@ tasks.withType<JavaCompile> {
 	}
 }
 
+allprojects {
+	version = System.getenv("VERSION") ?: "experimental-SNAPSHOT"
+	group = "city.smartb.fixers.gradle"
+	repositories {
+		mavenCentral()
+		gradlePluginPortal()
+	}
+}
 
 subprojects {
 	plugins.withType(JavaPlugin::class.java).whenPluginAdded {
+
 		extensions.configure(JavaPluginExtension::class.java) {
+			sourceCompatibility = JavaVersion.VERSION_11
 			toolchain.languageVersion.set(JavaLanguageVersion.of(11))
 		}
 	}
@@ -35,11 +45,4 @@ subprojects {
 
 	}
 }
-allprojects {
-	version = System.getenv("VERSION") ?: "experimental-SNAPSHOT"
-	group = "city.smartb.fixers.gradle"
-	repositories {
-		mavenCentral()
-		gradlePluginPortal()
-	}
-}
+

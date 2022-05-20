@@ -31,10 +31,10 @@ class SonarPlugin : Plugin<Project> {
 			config = rootProject.files("detekt.yml")
 			reports {
 				xml {
-					enabled = true
+					required.set(true)
 				}
 				html {
-					enabled = true
+					required.set(true)
 				}
 			}
 		}
