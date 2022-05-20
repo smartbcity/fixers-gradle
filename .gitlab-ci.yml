@@ -1,5 +1,7 @@
 include:
   - project: 'framework/fixers/cicd'
+    ref: '0.3.0'
     file: 'fixers/.gitlab-ci-base.yml'
   - project: 'framework/fixers/cicd'
+    ref: '0.3.0'
     file: 'fixers/.gitlab-ci-libs.yml'
