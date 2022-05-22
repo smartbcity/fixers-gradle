@@ -22,7 +22,8 @@ class MppJsPlugin : Plugin<Project> {
 
                     testTask {
                         useKarma {
-                            useChromeHeadless()
+                            useFirefoxHeadless()
+//                            useChromeHeadless()
                         }
                     }
                 }

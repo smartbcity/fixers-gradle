@@ -4,8 +4,8 @@ import org.gradle.api.artifacts.Dependency
 
 object FixersPluginVersions {
 	const val kotlin = "1.6.21"
-	const val springBoot = "2.6.7"
-	const val npmPublish = "2.1.2"
+	const val springBoot = "2.6.8"
+	const val npmPublish = "3.0.0"
 	const val ksp = "1.6.21-1.0.5"
 
 	val fixers = FixersPluginVersions::class.java.`package`.implementationVersion!!
