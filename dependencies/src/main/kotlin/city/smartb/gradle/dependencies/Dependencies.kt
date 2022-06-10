@@ -6,7 +6,7 @@ object FixersPluginVersions {
 	const val kotlin = "1.6.21"
 	const val springBoot = "2.6.8"
 	const val npmPublish = "3.0.0"
-	const val ksp = "1.6.21-1.0.5"
+	const val ksp = "1.7.0-1.0.6"
 
 	val fixers = FixersPluginVersions::class.java.`package`.implementationVersion!!
 }
@@ -24,7 +24,7 @@ object FixersVersions {
 	}
 
 	object Json {
-		const val jacksonKotlin = "2.13.2"
+		const val jacksonKotlin = "2.13.3"
 	}
 
 	object Test {
@@ -32,11 +32,11 @@ object FixersVersions {
 		const val junit = "5.8.2"
 		const val junitPlatform = "1.8.2"
 		const val assertj = "3.22.0"
-		const val testcontainers = "1.16.3"
+		const val testcontainers = "1.17.2"
 	}
 
 	object Kotlin {
-		const val coroutines = "1.6.1"
+		const val coroutines = "1.6.2"
 		const val serialization = "1.3.3"
 	}
 }
