@@ -3,7 +3,7 @@ package city.smartb.gradle.dependencies
 import org.gradle.api.artifacts.Dependency
 
 object FixersPluginVersions {
-	const val kotlin = "1.6.21"
+	const val kotlin = "1.7.0"
 	const val springBoot = "2.6.8"
 	const val npmPublish = "3.0.0"
 	const val ksp = "1.7.0-1.0.6"
@@ -19,7 +19,7 @@ object FixersVersions {
 	object Spring {
 		const val boot = FixersPluginVersions.springBoot
 		const val data = "2.6.4"
-		const val framework = "5.3.19"
+		const val framework = "5.3.20"
 		const val javaxPersistence = "2.2"
 	}
 
