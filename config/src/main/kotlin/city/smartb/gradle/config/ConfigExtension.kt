@@ -7,12 +7,12 @@ import city.smartb.gradle.config.model.Repository
 import city.smartb.gradle.config.model.Sonar
 import city.smartb.gradle.config.model.smartB
 import city.smartb.gradle.config.model.sonatype
+import org.gradle.api.Action
 import org.gradle.api.Project
 import org.gradle.api.plugins.ExtensionContainer
 import org.gradle.api.publish.maven.MavenPom
 import org.gradle.plugin.use.PluginDependenciesSpec
 import org.gradle.plugin.use.PluginDependencySpec
-import org.gradle.api.Action
 
 /**
  * Retrieves the [fixers][city.smartb.fixers.gradle.fixers] extension.
@@ -105,7 +105,7 @@ fun pom(bundle: Bundle): Action<MavenPom> = Action {
 			id.set("SmartB")
 			name.set("SmartB Team")
 			organization.set("SmartB")
-			organizationUrl.set("https://www.smartb.city")
+			organizationUrl.set("https://smartb.network")
 		}
 	}
 }
