@@ -1,6 +1,9 @@
 package city.smartb.fixers.gradle.kotlin
 
+import city.smartb.gradle.config.fixers
+import city.smartb.gradle.config.model.Jdk
 import city.smartb.gradle.dependencies.FixersDependencies
+import city.smartb.gradle.dependencies.FixersPluginVersions
 import org.gradle.api.Action
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -41,10 +44,13 @@ class MppPlugin : Plugin<Project> {
 	}
 
 	private fun setupJvmTarget(project: Project) {
+		val fixersConfig = project.extensions.fixers
 		project.kotlin {
 			jvm {
 				compilations.all {
-					kotlinOptions.jvmTarget = "11"
+					val jdkVersion = fixersConfig?.jdk?.version ?: Jdk.VERSION_DEFAULT
+					kotlinOptions.jvmTarget = jdkVersion.toString()
+					kotlinOptions.languageVersion = FixersPluginVersions.kotlin
 				}
 			}
 			sourceSets.getByName("jvmMain") {

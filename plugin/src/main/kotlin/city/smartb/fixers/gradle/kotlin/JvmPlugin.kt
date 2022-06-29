@@ -4,14 +4,17 @@ import city.smartb.fixers.gradle.config.ConfigPlugin
 import city.smartb.gradle.config.fixers
 import city.smartb.gradle.config.model.Jdk
 import city.smartb.gradle.dependencies.FixersDependencies
+import city.smartb.gradle.dependencies.FixersPluginVersions
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.plugins.JavaPlugin
 import org.gradle.api.plugins.JavaPluginExtension
 import org.gradle.api.tasks.testing.Test
-import org.gradle.jvm.tasks.Jar
 import org.gradle.jvm.toolchain.JavaLanguageVersion
-import org.gradle.kotlin.dsl.*
+import org.gradle.kotlin.dsl.apply
+import org.gradle.kotlin.dsl.dependencies
+import org.gradle.kotlin.dsl.kotlin
+import org.gradle.kotlin.dsl.withType
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 @Suppress("UnstableApiUsage")
@@ -27,13 +30,14 @@ class JvmPlugin : Plugin<Project> {
 		target.apply(plugin = "org.jetbrains.kotlin.jvm")
 		target.plugins.apply(ConfigPlugin::class.java)
 		val fixersConfig = target.extensions.fixers
-
 		val jdkVersion = fixersConfig?.jdk?.version ?: Jdk.VERSION_DEFAULT
+
 		target.tasks.withType<KotlinCompile>().configureEach {
 			println("Configuring $name in project ${project.name}...")
 			kotlinOptions {
 				freeCompilerArgs = listOf("-Xjsr305=strict",  "-Xopt-in=kotlin.js.ExperimentalJsExport")
 				jvmTarget = jdkVersion.toString()
+				languageVersion = FixersPluginVersions.kotlin
 			}
 		}
 
