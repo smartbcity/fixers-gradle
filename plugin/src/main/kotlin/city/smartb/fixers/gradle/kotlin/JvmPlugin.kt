@@ -37,7 +37,7 @@ class JvmPlugin : Plugin<Project> {
 			kotlinOptions {
 				freeCompilerArgs = listOf("-Xjsr305=strict",  "-Xopt-in=kotlin.js.ExperimentalJsExport")
 				jvmTarget = jdkVersion.toString()
-				languageVersion = FixersPluginVersions.kotlin
+				languageVersion = FixersPluginVersions.kotlin.substringBeforeLast(".")
 			}
 		}
 

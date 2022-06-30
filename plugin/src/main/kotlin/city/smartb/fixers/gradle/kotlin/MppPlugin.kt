@@ -50,7 +50,7 @@ class MppPlugin : Plugin<Project> {
 				compilations.all {
 					val jdkVersion = fixersConfig?.jdk?.version ?: Jdk.VERSION_DEFAULT
 					kotlinOptions.jvmTarget = jdkVersion.toString()
-					kotlinOptions.languageVersion = FixersPluginVersions.kotlin
+					kotlinOptions.languageVersion = FixersPluginVersions.kotlin.substringBeforeLast(".")
 				}
 			}
 			sourceSets.getByName("jvmMain") {
