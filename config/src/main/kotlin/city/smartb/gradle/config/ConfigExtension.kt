@@ -2,6 +2,7 @@ package city.smartb.gradle.config
 
 import city.smartb.gradle.config.model.Bundle
 import city.smartb.gradle.config.model.Jdk
+import city.smartb.gradle.config.model.Kt2Ts
 import city.smartb.gradle.config.model.Publication
 import city.smartb.gradle.config.model.Repository
 import city.smartb.gradle.config.model.Sonar
@@ -53,6 +54,8 @@ open class ConfigExtension(
 		name = project.name
 	)
 
+	var kt2Ts: Kt2Ts? = null
+
 	var jdk: Jdk = Jdk(
 		version = 11
 	)
@@ -67,6 +70,10 @@ open class ConfigExtension(
 	fun bundle(configure: Action<Bundle>) {
 		configure.execute(bundle)
 		publication(pom(bundle))
+	}
+
+	fun kt2Ts(configure: Action<Kt2Ts>) {
+		configure.execute(kt2Ts ?: Kt2Ts("platform/web/kotlin"))
 	}
 
 	fun sonar(configure: Action<Sonar>) {
