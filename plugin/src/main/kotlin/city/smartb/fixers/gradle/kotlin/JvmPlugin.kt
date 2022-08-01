@@ -35,7 +35,7 @@ class JvmPlugin : Plugin<Project> {
 		target.tasks.withType<KotlinCompile>().configureEach {
 			println("Configuring $name in project ${project.name}...")
 			kotlinOptions {
-				freeCompilerArgs = listOf("-Xjsr305=strict",  "-Xopt-in=kotlin.js.ExperimentalJsExport")
+				freeCompilerArgs = listOf("-Xjsr305=strict",  "-opt-in=kotlin.js.ExperimentalJsExport")
 				jvmTarget = jdkVersion.toString()
 				languageVersion = FixersPluginVersions.kotlin.substringBeforeLast(".")
 			}
