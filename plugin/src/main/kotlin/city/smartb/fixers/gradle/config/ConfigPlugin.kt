@@ -56,7 +56,7 @@ class ConfigPlugin : Plugin<Project> {
 								Regex("""org.w3c.dom.url.""") to "",
 								Regex("""org.w3c.dom.""") to "",
 								Regex(""" any/\* ([^*/]*) \*/""") to " $1",
-								Regex("""type Nullable<T> = T | null | undefined""") to ""
+								Regex("""type Nullable<T> = T \| null \| undefined\n""") to ""
 							),
 							"package.json" to listOf(
 								Regex("""("devDependencies": \{)(.|\n)*?(},)""") to "$1$3"
