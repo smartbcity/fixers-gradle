@@ -4,7 +4,7 @@ import org.gradle.api.artifacts.Dependency
 
 object FixersPluginVersions {
 	const val kotlin = "1.7.10"
-	const val springBoot = "2.6.8"
+	const val springBoot = "2.6.11"
 	const val npmPublish = "3.0.0"
 	const val ksp = "1.7.10-1.0.6"
 
@@ -17,27 +17,27 @@ object FixersVersions {
 	}
 	object Spring {
 		const val boot = FixersPluginVersions.springBoot
-		const val data = "2.6.5"
-		const val framework = "5.3.21"
+		const val data = "2.6.6"
+		const val framework = "5.3.22"
 		const val javaxPersistence = "2.2"
 	}
 
 	object Json {
-		const val jacksonKotlin = "2.13.3"
+		const val jacksonKotlin = "2.13.4"
 	}
 
 	object Test {
-		const val cucumber = "7.4.1"
-		const val junit = "5.8.2"
-		const val junitPlatform = "1.8.2"
+		const val cucumber = "7.7.0"
+		const val junit = "5.9.0"
+		const val junitPlatform = "1.9.0"
 		const val assertj = "3.23.1"
 		const val testcontainers = "1.17.3"
 	}
 
 	object Kotlin {
-		const val coroutines = "1.6.3"
-		const val serialization = "1.3.3"
-		const val ktor = "2.0.3"
+		const val coroutines = "1.6.4"
+		const val serialization = "1.4.0"
+		const val ktor = "2.1.1"
 	}
 }
 
