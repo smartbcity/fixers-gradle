@@ -3,10 +3,10 @@ package city.smartb.gradle.dependencies
 import org.gradle.api.artifacts.Dependency
 
 object FixersPluginVersions {
-	const val kotlin = "1.7.10"
+	const val kotlin = "1.7.20"
 	const val springBoot = "2.6.11"
 	const val npmPublish = "3.0.0"
-	const val ksp = "1.7.10-1.0.6"
+	const val ksp = "1.7.20-1.0.6"
 
 	val fixers = FixersPluginVersions::class.java.`package`.implementationVersion!!
 }
