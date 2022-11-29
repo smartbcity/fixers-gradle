@@ -29,7 +29,7 @@ val ExtensionContainer.fixers: ConfigExtension?
  * Configures the [fixers][city.smartb.fixers.gradle.fixers] extension.
  */
 fun Project.fixers(configure: Action<ConfigExtension>): Unit =
-	(this as org.gradle.api.plugins.ExtensionAware).extensions.configure(ConfigExtension.NAME, configure)
+	this.rootProject.extensions.configure(ConfigExtension.NAME, configure)
 
 /**
  * Configures the [fixers][city.smartb.fixers.gradle.fixers] extension if exists.
@@ -43,7 +43,7 @@ fun ExtensionContainer.fixersIfExists(configure: Action<ConfigExtension>) {
 fun PluginDependenciesSpec.fixers(module: String): PluginDependencySpec = id("city.smartb.fixers.gradle.${module}")
 
 
-open class ConfigExtension(
+open abstract class ConfigExtension(
 	val project: Project
 ) {
 	companion object {
@@ -54,7 +54,7 @@ open class ConfigExtension(
 		name = project.name
 	)
 
-	var kt2Ts: Kt2Ts? = null
+	var kt2Ts: Kt2Ts = Kt2Ts(outputDirectory = "platform/web/kotlin")
 
 	var jdk: Jdk = Jdk(
 		version = 11
@@ -73,7 +73,7 @@ open class ConfigExtension(
 	}
 
 	fun kt2Ts(configure: Action<Kt2Ts>) {
-		configure.execute(kt2Ts ?: Kt2Ts("platform/web/kotlin"))
+		configure.execute(kt2Ts)
 	}
 
 	fun sonar(configure: Action<Sonar>) {

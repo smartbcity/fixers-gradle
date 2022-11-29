@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test
 
 internal class PublishMppPluginTest {
 
-
 	@Test
 	fun takeUnless() {
 		val projectName = "f2-client"

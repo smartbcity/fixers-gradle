@@ -1,5 +1,6 @@
 package city.smartb.gradle.config.model
 
 data class Kt2Ts(
-    val outputDirectory: String
+    var outputDirectory: String,
+    var inputDirectory: String? = null
 )
