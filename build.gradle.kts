@@ -21,14 +21,8 @@ allprojects {
 	}
 }
 
-subprojects {
-	plugins.withType(JavaPlugin::class.java).whenPluginAdded {
 
-		extensions.configure(JavaPluginExtension::class.java) {
-			sourceCompatibility = JavaVersion.VERSION_11
-			toolchain.languageVersion.set(JavaLanguageVersion.of(11))
-		}
-	}
+subprojects {
 	tasks.withType<Jar> {
 		manifest {
 			attributes(
@@ -39,10 +33,8 @@ subprojects {
 	}
 	tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
 		kotlinOptions {
-			freeCompilerArgs = listOf("-Xjsr305=strict")
-			jvmTarget = "11"
+			languageVersion = "1.4"
 		}
-
 	}
 }
 
