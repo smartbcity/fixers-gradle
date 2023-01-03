@@ -4,6 +4,6 @@ data class Jdk(
 	var version: Int? = null,
 ) {
 	companion object {
-		val VERSION_DEFAULT = 11
+		val VERSION_DEFAULT = 17
 	}
 }

@@ -3,10 +3,10 @@ package city.smartb.gradle.dependencies
 import org.gradle.api.artifacts.Dependency
 
 object FixersPluginVersions {
-	const val kotlin = "1.7.22"
-	const val springBoot = "2.6.14"
-	const val npmPublish = "3.1.0"
-	const val ksp = "1.7.22-1.0.8"
+	const val kotlin = "1.8.0"
+	const val springBoot = "3.0.1"
+	const val npmPublish = "3.2.0"
+	const val ksp = "1.8.0-1.0.8"
 
 	val fixers = FixersPluginVersions::class.java.`package`.implementationVersion!!
 }
@@ -17,9 +17,11 @@ object FixersVersions {
 	}
 	object Spring {
 		const val boot = FixersPluginVersions.springBoot
-		const val data = "2.6.10"
-		const val framework = "5.3.24"
-		const val javaxPersistence = "2.2"
+		const val data = "3.0.0"
+		const val framework = "6.0.3"
+		// TODO Remove this line; Spring boot 3.x migrate to Jakarta EE 9 APIs jakarta.*
+		// We probably need to add jakarta.persistence-api:3.1.0
+//		const val javaxPersistence = "2.2"
 	}
 
 	object Json {
@@ -37,7 +39,7 @@ object FixersVersions {
 	object Kotlin {
 		const val coroutines = "1.6.4"
 		const val serialization = "1.4.1"
-		const val ktor = "2.1.3"
+		const val ktor = "2.2.1"
 	}
 }
 
@@ -58,7 +60,8 @@ object FixersDependencies {
 
 		object Spring {
 			fun dataCommons(scope: Scope) = scope.add(
-				"javax.persistence:javax.persistence-api:${FixersVersions.Spring.javaxPersistence}",
+				// TODO Remove this line; Spring boot 3.x migrate to Jakarta EE 9 APIs jakarta.*
+//				"javax.persistence:javax.persistence-api:${FixersVersions.Spring.javaxPersistence}",
 				"org.springframework:spring-context:${FixersVersions.Spring.framework}",
 				"org.springframework.data:spring-data-commons:${FixersVersions.Spring.data}"
 			)

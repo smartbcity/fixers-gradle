@@ -57,7 +57,7 @@ open abstract class ConfigExtension(
 	var kt2Ts: Kt2Ts = Kt2Ts(outputDirectory = "platform/web/kotlin")
 
 	var jdk: Jdk = Jdk(
-		version = 11
+		version = 17
 	)
 
 	var repository: Repository = Repository.sonatype(project)
