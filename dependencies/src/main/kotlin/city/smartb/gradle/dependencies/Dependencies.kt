@@ -7,6 +7,7 @@ object FixersPluginVersions {
 	const val springBoot = "3.0.1"
 	const val npmPublish = "3.2.0"
 	const val ksp = "1.8.0-1.0.8"
+	const val graalvm = "0.9.19"
 
 	val fixers = FixersPluginVersions::class.java.`package`.implementationVersion!!
 }
@@ -19,9 +20,7 @@ object FixersVersions {
 		const val boot = FixersPluginVersions.springBoot
 		const val data = "3.0.0"
 		const val framework = "6.0.3"
-		// TODO Remove this line; Spring boot 3.x migrate to Jakarta EE 9 APIs jakarta.*
-		// We probably need to add jakarta.persistence-api:3.1.0
-//		const val javaxPersistence = "2.2"
+	 	const val jakartaPersistence = "3.1.0"
 	}
 
 	object Json {
@@ -60,8 +59,7 @@ object FixersDependencies {
 
 		object Spring {
 			fun dataCommons(scope: Scope) = scope.add(
-				// TODO Remove this line; Spring boot 3.x migrate to Jakarta EE 9 APIs jakarta.*
-//				"javax.persistence:javax.persistence-api:${FixersVersions.Spring.javaxPersistence}",
+				"jakarta.persistence:jakarta.persistence-api:${FixersVersions.Spring.jakartaPersistence}",
 				"org.springframework:spring-context:${FixersVersions.Spring.framework}",
 				"org.springframework.data:spring-data-commons:${FixersVersions.Spring.data}"
 			)

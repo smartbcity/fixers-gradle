@@ -5,7 +5,6 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 
-@Suppress("UnstableApiUsage")
 class MppJsPlugin : Plugin<Project> {
 
     override fun apply(target: Project) {
