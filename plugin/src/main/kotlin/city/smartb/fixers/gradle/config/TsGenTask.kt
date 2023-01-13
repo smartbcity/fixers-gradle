@@ -35,6 +35,8 @@ fun Project.configureKt2Ts(mainConfig: ConfigExtension?) {
                 val cleaning = listOf(
                     ".d.ts" to listOf(
                         Regex("""(?m).*__doNotImplementIt.*\n""") to "",
+                        Regex(""".*__doNotUseOrImplementIt:*[\s\S]*?};\n""") to "",
+                        Regex(""".*__doNotUseOrImplementIt[\s\S]*?__doNotUseOrImplementIt"];\n""") to "",
                         Regex("""kotlin.js.""") to "",
                         Regex("""org.w3c.dom.url.""") to "",
                         Regex("""org.w3c.dom.""") to "",
