@@ -4,7 +4,7 @@ import org.gradle.api.artifacts.Dependency
 
 object FixersPluginVersions {
 	const val kotlin = "1.8.0"
-	const val springBoot = "3.0.1"
+	const val springBoot = "3.0.2"
 	const val npmPublish = "3.2.0"
 	const val ksp = "1.8.0-1.0.8"
 	const val graalvm = "0.9.19"
@@ -14,12 +14,13 @@ object FixersPluginVersions {
 
 object FixersVersions {
 	object Logging {
-		const val slf4j = "1.7.36"
+		const val slf4j = "2.0.6"
 	}
+
 	object Spring {
 		const val boot = FixersPluginVersions.springBoot
-		const val data = "3.0.0"
-		const val framework = "6.0.3"
+		const val data = "3.0.1"
+		const val framework = "6.0.4"
 	 	const val jakartaPersistence = "3.1.0"
 	}
 
@@ -28,7 +29,7 @@ object FixersVersions {
 	}
 
 	object Test {
-		const val cucumber = "7.9.0"
+		const val cucumber = "7.11.0"
 		const val junit = "5.9.1"
 		const val junitPlatform = "1.9.1"
 		const val assertj = "3.23.1"
@@ -38,7 +39,7 @@ object FixersVersions {
 	object Kotlin {
 		const val coroutines = "1.6.4"
 		const val serialization = "1.4.1"
-		const val ktor = "2.2.1"
+		const val ktor = "2.2.2"
 	}
 }
 
@@ -82,6 +83,7 @@ object FixersDependencies {
 
 		object Test {
 			fun cucumber(scope: Scope) = scope.add(
+				"io.cucumber:cucumber-java:${FixersVersions.Test.cucumber}",
 				"io.cucumber:cucumber-java8:${FixersVersions.Test.cucumber}",
 				"io.cucumber:cucumber-junit-platform-engine:${FixersVersions.Test.cucumber}",
 			)

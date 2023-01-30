@@ -31,12 +31,14 @@ fun Project.configureKt2Ts(mainConfig: ConfigExtension?) {
                 }
                 into(config.outputDirectory)
                 includeEmptyDirs = false
-
+                // New
+                // ^.*readonly __doNotUseOrImplementIt.*;\n
+                // ^.*__doNotUseOrImplementIt:*[\s\S].*\n.*\n.*;
                 val cleaning = listOf(
                     ".d.ts" to listOf(
                         Regex("""(?m).*__doNotImplementIt.*\n""") to "",
-                        Regex(""".*__doNotUseOrImplementIt:*[\s\S]*?};\n""") to "",
-                        Regex(""".*__doNotUseOrImplementIt[\s\S]*?__doNotUseOrImplementIt"];\n""") to "",
+                        Regex(""".*readonly __doNotUseOrImplementIt.*;\n""") to "",
+                        Regex(""".*__doNotUseOrImplementIt:*[\s\S].*\n.*\n.*;""") to "",
                         Regex("""kotlin.js.""") to "",
                         Regex("""org.w3c.dom.url.""") to "",
                         Regex("""org.w3c.dom.""") to "",
