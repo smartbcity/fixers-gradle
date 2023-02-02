@@ -15,10 +15,10 @@ class PublishPlugin : Plugin<Project> {
 
 	override fun apply(target: Project) {
 		target.plugins.apply(MavenPublishPlugin::class.java)
-		target.plugins.apply(ConfigPlugin::class.java)
+//		target.plugins.apply(ConfigPlugin::class.java)
 		target.logger.info("Apply PublishPlugin to ${target.name}")
 		target.afterEvaluate {
-			val fixers = target.extensions.fixers
+			val fixers = target.rootProject.extensions.fixers
 			fixers?.let { fixersConfig ->
 				setupPublishing(fixersConfig)
 				setupSign()

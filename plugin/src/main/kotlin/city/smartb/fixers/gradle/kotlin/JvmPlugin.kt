@@ -29,7 +29,7 @@ class JvmPlugin : Plugin<Project> {
 		target.apply(plugin = "java")
 		target.apply(plugin = "org.jetbrains.kotlin.jvm")
 		target.plugins.apply(ConfigPlugin::class.java)
-		val fixersConfig = target.extensions.fixers
+		val fixersConfig = target.rootProject.extensions.fixers
 		val jdkVersion = fixersConfig?.jdk?.version ?: Jdk.VERSION_DEFAULT
 
 		target.tasks.withType<KotlinCompile>().configureEach {

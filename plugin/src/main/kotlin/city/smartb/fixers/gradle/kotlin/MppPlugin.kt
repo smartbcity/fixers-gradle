@@ -44,7 +44,7 @@ class MppPlugin : Plugin<Project> {
 	}
 
 	private fun setupJvmTarget(project: Project) {
-		val fixersConfig = project.extensions.fixers
+		val fixersConfig = project.rootProject.extensions.fixers
 		project.kotlin {
 			jvm {
 				compilations.all {
