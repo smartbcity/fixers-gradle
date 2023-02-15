@@ -32,7 +32,7 @@ class PublishPlugin : Plugin<Project> {
 		publishing.repositories {
 			maven {
 				name = repository.name
-				url = repository.url
+				url = repository.getUrl(project)
 				credentials {
 					username = repository.username
 					password = repository.password
