@@ -4,8 +4,8 @@ import city.smartb.gradle.config.ConfigExtension
 import org.gradle.api.Project
 import org.gradle.api.tasks.Copy
 import org.gradle.api.tasks.Delete
-import org.gradle.kotlin.dsl.register
 import org.gradle.kotlin.dsl.invoke
+import org.gradle.kotlin.dsl.register
 
 
 fun Project.configureKt2Ts(mainConfig: ConfigExtension?) {
@@ -44,7 +44,11 @@ fun Project.configureKt2Ts(mainConfig: ConfigExtension?) {
                         Regex("""org.w3c.dom.""") to "",
                         Regex(""" any/\* ([^*/]*) \*/""") to " $1",
                         Regex("""type Nullable<T> = T \| null \| undefined\n""") to "",
-                        Regex("""(?<=\(|, |readonly )(\w*)(\?)?: Nullable<([\w\.<>, ]*)>(?=\)|, |;)""") to "$1?: $3"
+                        Regex("""(?<=\(|, |readonly )(\w*)(\?)?: Nullable<([\w\.<>, ]*)>(?=\)|, |;)""") to "$1?: $3",
+                        Regex("""kotlin.collections.Map""") to "Record",
+                        Regex("""kotlin.collections.List<(.*)>""") to "$1[]",
+                        Regex("""kotlin.collections.List<(.*)>""") to "$1[]", // in case of List<List<T>>
+                        Regex("""kotlin.Long""") to "number"
                     ),
                     "package.json" to listOf(
                         Regex("""("devDependencies": \{)(.|\n)*?(},)""") to "$1$3"
