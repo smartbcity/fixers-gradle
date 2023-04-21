@@ -31,10 +31,8 @@ fun Project.configureKt2Ts(mainConfig: ConfigExtension?) {
                 }
                 into(config.outputDirectory)
                 includeEmptyDirs = false
-                // New
-                // ^.*readonly __doNotUseOrImplementIt.*;\n
-                // ^.*__doNotUseOrImplementIt:*[\s\S].*\n.*\n.*;
-                val cleaning = listOf(
+
+                val cleaning = mutableMapOf(
                     ".d.ts" to listOf(
                         Regex("""(?m).*__doNotImplementIt.*\n""") to "",
                         Regex(""".*readonly __doNotUseOrImplementIt.*;\n""") to "",
@@ -48,12 +46,14 @@ fun Project.configureKt2Ts(mainConfig: ConfigExtension?) {
                         Regex("""kotlin.collections.Map""") to "Record",
                         Regex("""kotlin.collections.List<(.*)>""") to "$1[]",
                         Regex("""kotlin.collections.List<(.*)>""") to "$1[]", // in case of List<List<T>>
-                        Regex("""kotlin.Long""") to "number"
-                    ),
+                        Regex("""kotlin.Long""") to "number",
+                        Regex("""static get Companion(.*\n)*?(\s)*}( &.*)?;""") to ""
+                    ) + config.additionalCleaning[".d.ts"].orEmpty(),
                     "package.json" to listOf(
                         Regex("""("devDependencies": \{)(.|\n)*?(},)""") to "$1$3"
-                    )
+                    ) + config.additionalCleaning["package.json"].orEmpty()
                 )
+                cleaning.putAll(config.additionalCleaning.filterKeys { it !in cleaning.keys })
 
                 eachFile {
                     cleaning.forEach { (suffix, changes) ->
