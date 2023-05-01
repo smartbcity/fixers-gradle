@@ -9,7 +9,7 @@ Ease the configuration of Kotlin Fixers Project.
 Ease the configuration of Kotlin Jvm Module.
 
 ## city.smartb.fixers.gradle.kotlin.mpp
-Ease the configuration of Kotlin Multiplateform Plugin.
+Ease the configuration of Kotlin Multiplatform Plugin.
 
 
 ## city.smartb.fixers.gradle.publish
