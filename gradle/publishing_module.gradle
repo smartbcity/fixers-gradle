@@ -37,27 +37,6 @@ afterEvaluate { Project project ->
                 artifact javadocJar
                 pom.withXml(configureMavenCentralMetadata)
             }
-            pluginMaven(MavenPublication) {
-                pom.withXml(configureMavenCentralMetadata)
-            }
-            'city.smartb.fixers.gradle.configPluginMarkerMaven'(MavenPublication) {
-                pom.withXml(configurePomMetadata)
-            }
-            'city.smartb.fixers.gradle.dependenciesPluginMarkerMaven'(MavenPublication) {
-                pom.withXml(configurePomMetadata)
-            }
-            'city.smartb.fixers.gradle.kotlin.jvmPluginMarkerMaven'(MavenPublication) {
-                pom.withXml(configurePomMetadata)
-            }
-            'city.smartb.fixers.gradle.kotlin.mppPluginMarkerMaven'(MavenPublication) {
-                pom.withXml(configurePomMetadata)
-            }
-            'city.smartb.fixers.gradle.publishPluginMarkerMaven'(MavenPublication) {
-                pom.withXml(configurePomMetadata)
-            }
-            'city.smartb.fixers.gradle.sonarPluginMarkerMaven'(MavenPublication) {
-                pom.withXml(configurePomMetadata)
-            }
         }
         repositories {
             maven {
@@ -74,14 +53,6 @@ afterEvaluate { Project project ->
         def password = signingPassword
         useInMemoryPgpKeys(key, password)
         sign publishing.publications.mavenJava
-
-        sign publishing.publications.'city.smartb.fixers.gradle.configPluginMarkerMaven'
-        sign publishing.publications.'city.smartb.fixers.gradle.dependenciesPluginMarkerMaven'
-        sign publishing.publications.'city.smartb.fixers.gradle.kotlin.jvmPluginMarkerMaven'
-        sign publishing.publications.'city.smartb.fixers.gradle.kotlin.mppPluginMarkerMaven'
-        sign publishing.publications.'city.smartb.fixers.gradle.publishPluginMarkerMaven'
-        sign publishing.publications.'city.smartb.fixers.gradle.sonarPluginMarkerMaven'
-
     }
 
 }

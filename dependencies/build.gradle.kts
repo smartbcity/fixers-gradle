@@ -2,4 +2,4 @@ plugins {
     `kotlin-dsl`
 }
 
-apply(from = rootProject.file("gradle/publishing.gradle"))
+apply(from = rootProject.file("gradle/publishing_module.gradle"))
