@@ -8,7 +8,7 @@ import org.gradle.api.Project
 
 class ConfigPlugin : Plugin<Project> {
 	override fun apply(target: Project) {
-		val mainConfig = target.createExtension()
+		target.createExtension()
 		val root: Project = target.rootProject
 		target.afterEvaluate {
 			target.logger.info("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^")

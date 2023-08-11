@@ -1,6 +1,7 @@
 package city.smartb.fixers.gradle.kotlin
 
 import city.smartb.gradle.dependencies.FixersPluginVersions
+import org.gradle.api.Action
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
@@ -14,18 +15,18 @@ class MppJsPlugin : Plugin<Project> {
     private fun configureJsCompilation(target: Project) {
         target.extensions.configure(KotlinMultiplatformExtension::class.java) {
             js(IR) {
-                binaries.library()
+                binaries.executable()
                 browser {
-                    browser()
-                    binaries.executable()
-
-                    testTask {
-                        useKarma {
-                            useFirefoxHeadless()
-//                            useChromeHeadless()
+                    testTask (
+                        Action {
+                            useKarma {
+                                useFirefoxHeadless()
+//                                useChromeHeadless()
+                            }
                         }
-                    }
+                    )
                 }
+                generateTypeScriptDefinitions()
             }
             sourceSets.getByName("jsMain") {
                 dependencies {
