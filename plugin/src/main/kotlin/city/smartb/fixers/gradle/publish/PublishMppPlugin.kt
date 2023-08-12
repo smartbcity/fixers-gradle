@@ -24,7 +24,9 @@ object PublishMppPlugin {
 			publications.all {
 				val mavenPublication = this as? MavenPublication
 				mavenPublication?.artifactId = getArtifactId(variantName, name)
-				publication?.let { mavenPublication?.pom(publication.configure) }
+				publication?.let {
+					mavenPublication?.pom(publication.configure)
+				}
 				mavenPublication?.artifact(tasks["javadocJar"])
 			}
 		}

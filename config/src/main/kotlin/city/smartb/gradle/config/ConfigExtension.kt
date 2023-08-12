@@ -65,11 +65,10 @@ open abstract class ConfigExtension(
 	var publication: Publication? = null
 
 	var sonar: Sonar = Sonar.smartB(project)
-	var properties: MutableMap<String, Any> = mutableMapOf()
 
 	fun bundle(configure: Action<Bundle>) {
 		configure.execute(bundle)
-		publication(pom(bundle))
+		publication(project.pom(bundle))
 	}
 
 	fun kt2Ts(configure: Action<Kt2Ts>) {
@@ -93,7 +92,7 @@ open abstract class ConfigExtension(
 	}
 }
 
-fun pom(bundle: Bundle): Action<MavenPom> = Action {
+fun Project.pom(bundle: Bundle): Action<MavenPom> = Action {
 	name.set(bundle.name)
 	description.set(bundle.description)
 	url.set(bundle.url)

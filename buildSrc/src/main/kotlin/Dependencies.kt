@@ -8,3 +8,9 @@ object PluginVersions {
 	const val dokka = "1.7.0"
 	const val sonarQube = "3.3"
 }
+
+object Versions {
+	const val junit = "5.8.1"
+	const val assert4j = "3.21.0"
+
+}

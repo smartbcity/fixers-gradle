@@ -1,6 +1,5 @@
 package city.smartb.fixers.gradle.publish
 
-import city.smartb.fixers.gradle.config.ConfigPlugin
 import city.smartb.gradle.config.ConfigExtension
 import city.smartb.gradle.config.fixers
 import org.gradle.api.Plugin
@@ -8,13 +7,14 @@ import org.gradle.api.Project
 import org.gradle.api.publish.PublishingExtension
 import org.gradle.api.publish.maven.plugins.MavenPublishPlugin
 import org.gradle.plugins.signing.SigningExtension
-import org.gradle.plugins.signing.SigningPlugin
 import java.lang.System.getenv
+import org.gradle.plugins.signing.SigningPlugin
 
 class PublishPlugin : Plugin<Project> {
 
 	override fun apply(target: Project) {
 		target.plugins.apply(MavenPublishPlugin::class.java)
+		target.plugins.apply(SigningPlugin::class.java)
 		target.logger.info("Apply PublishPlugin to ${target.name}")
 		target.afterEvaluate {
 			val fixers = target.rootProject.extensions.fixers
@@ -50,7 +50,7 @@ class PublishPlugin : Plugin<Project> {
 			logger.warn("No signing config provided, skip signing")
 			return
 		}
-		plugins.apply(SigningPlugin::class.java)
+
 		extensions.getByType(SigningExtension::class.java).apply {
 			isRequired = true
 			useInMemoryPgpKeys(inMemoryKey, password)

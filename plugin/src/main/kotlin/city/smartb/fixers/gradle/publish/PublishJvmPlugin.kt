@@ -16,7 +16,7 @@ object PublishJvmPlugin {
 
 	fun setupJVMPublish(project: Project, publication: Publication?) {
 		project.plugins.withType(JvmPlugin::class.java) {
-			setupJvmPublishJar(project)
+			project.setupJvmPublishJar()
 			project.setupPublication(publication)
 			project.setupExistingPublication(publication)
 		}
@@ -25,11 +25,12 @@ object PublishJvmPlugin {
 	private fun Project.setupExistingPublication(publication: Publication?) {
 		val variantName = name
 		configure<PublishingExtension> {
-			this.publications.maybeCreate("")
 			publications.all {
 				val mavenPublication = this as? MavenPublication
 				mavenPublication?.artifactId = getArtifactId(variantName, name)
-				publication?.let { mavenPublication?.pom(publication.configure) }
+				publication?.let {
+					mavenPublication?.pom(publication.configure)
+				}
 				mavenPublication?.artifact(tasks["javadocJar"])
 				mavenPublication?.artifact(tasks["sourcesJar"])
 			}
@@ -56,18 +57,18 @@ object PublishJvmPlugin {
 		}
 	}
 
-	private fun setupJvmPublishJar(project: Project) {
-		project.plugins.withType(JvmPlugin::class.java) {
-			project.tasks.register("javadocJar", Jar::class.java) {
-				val javadoc = project.tasks.named("javadoc")
+	private fun Project.setupJvmPublishJar() {
+		plugins.withType(JvmPlugin::class.java) {
+			tasks.register("javadocJar", Jar::class.java) {
+				val javadoc = tasks.named("javadoc")
 				dependsOn.add(javadoc)
 				archiveClassifier.set("javadoc")
 				from(javadoc)
 			}
 
-			project.tasks.register("sourcesJar", Jar::class.java) {
+			tasks.register("sourcesJar", Jar::class.java) {
 				archiveClassifier.set("sources")
-				val sourceSets = project.properties["sourceSets"] as SourceSetContainer
+				val sourceSets = properties["sourceSets"] as SourceSetContainer
 				from(sourceSets["main"].allSource)
 			}
 		}
