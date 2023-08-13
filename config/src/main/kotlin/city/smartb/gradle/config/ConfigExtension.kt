@@ -66,6 +66,8 @@ open abstract class ConfigExtension(
 
 	var sonar: Sonar = Sonar.smartB(project)
 
+	var properties: MutableMap<String, Any> = mutableMapOf()
+
 	fun bundle(configure: Action<Bundle>) {
 		configure.execute(bundle)
 		publication(project.pom(bundle))

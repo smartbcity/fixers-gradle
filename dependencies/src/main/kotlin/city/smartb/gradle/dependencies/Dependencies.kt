@@ -9,7 +9,7 @@ object FixersPluginVersions {
 	/**
 	 * com.google.devtools.ksp
 	 */
-	const val ksp = "1.8.10-1.0.9"
+	const val ksp = "1.9.0-1.0.13"
 	/**
 	 * org.graalvm.buildtools.native.gradle.plugin
 	 */
