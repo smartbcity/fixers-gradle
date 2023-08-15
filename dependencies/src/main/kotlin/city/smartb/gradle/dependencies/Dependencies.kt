@@ -4,8 +4,8 @@ import org.gradle.api.artifacts.Dependency
 
 object FixersPluginVersions {
 	const val kotlin = "1.9.0"
-	const val springBoot = "3.0.5"
-	const val npmPublish = "3.2.0"
+	const val springBoot = "3.1.2"
+	const val npmPublish = "3.4.1"
 	/**
 	 * com.google.devtools.ksp
 	 */
@@ -13,7 +13,7 @@ object FixersPluginVersions {
 	/**
 	 * org.graalvm.buildtools.native.gradle.plugin
 	 */
-	const val graalvm = "0.9.19"
+	const val graalvm = "0.9.24"
 
 	val fixers = FixersPluginVersions::class.java.`package`.implementationVersion!!
 }
@@ -25,28 +25,28 @@ object FixersVersions {
 
 	object Spring {
 		const val boot = FixersPluginVersions.springBoot
-		const val data = "3.0.4"
-		const val framework = "6.0.7"
+		const val data = "3.1.2"
+		const val framework = "6.0.11"
 	 	const val jakartaPersistence = "3.1.0"
 	}
 
 	object Json {
-		const val jackson = "2.14.2"
-		const val jacksonKotlin = "2.14.2"
+		const val jackson = "2.15.2"
+		const val jacksonKotlin = "2.15.2"
 	}
 
 	object Test {
-		const val cucumber = "7.11.2"
-		const val junit = "5.9.1"
-		const val junitPlatform = "1.9.1"
+		const val cucumber = "7.13.0"
+		const val junit = "5.10.0"
+		const val junitPlatform = "1.10.0"
 		const val assertj = "3.24.2"
-		const val testcontainers = "1.17.6"
+		const val testcontainers = "1.18.3"
 	}
 
 	object Kotlin {
-		const val coroutines = "1.6.4"
-		const val serialization = "1.5.0"
-		const val ktor = "2.2.4"
+		const val coroutines = "1.7.3"
+		const val serialization = "1.5.1"
+		const val ktor = "2.3.3"
 	}
 }
 
