@@ -27,6 +27,7 @@ object FixersVersions {
 		const val boot = FixersPluginVersions.springBoot
 		const val data = "3.1.2"
 		const val framework = "6.0.11"
+		const val security = "6.1.3"
 	 	const val jakartaPersistence = "3.1.0"
 	}
 
