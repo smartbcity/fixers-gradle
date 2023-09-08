@@ -3,6 +3,7 @@ package city.smartb.fixers.gradle.sonar
 import city.smartb.gradle.config.ConfigExtension
 import city.smartb.gradle.config.fixers
 import io.gitlab.arturbosch.detekt.Detekt
+import io.gitlab.arturbosch.detekt.DetektPlugin
 import io.gitlab.arturbosch.detekt.extensions.DetektExtension
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -29,36 +30,37 @@ class SonarPlugin : Plugin<Project> {
 	}
 
 	private fun Project.configureDetekt() {
-		plugins.apply("io.gitlab.arturbosch.detekt")
-		extensions.configure(DetektExtension::class.java) {
-			source.from(
-				files(
-					file("src")
-						.listFiles()
-						?.filter { it.isDirectory && it.name.endsWith("main", ignoreCase = true) }
+		pluginManager.withPlugin("io.gitlab.arturbosch.detekt") {
+			extensions.configure(DetektExtension::class.java) {
+				source.from(
+					files(
+						file("src")
+							.listFiles()
+							?.filter { it.isDirectory && it.name.endsWith("main", ignoreCase = true) }
+					)
 				)
-			)
-			config.from(
-				rootProject.files("detekt.yml")
-			)
-		}
-		tasks.withType(Detekt::class.java).configureEach {
-			reports {
-				// Enable/Disable XML report (default: true)
-				xml.required.set(true)
-				xml.outputLocation.set(file("build/reports/detekt.xml"))
-				// Enable/Disable HTML report (default: true)
-				html.required.set(true)
-				html.outputLocation.set(file("build/reports/detekt.html"))
-				// Enable/Disable TXT report (default: true)
-				txt.required.set(false)
-				txt.outputLocation.set(file("build/reports/detekt.txt"))
-				// Enable/Disable SARIF report (default: false)
-				sarif.required.set(false)
-				sarif.outputLocation.set(file("build/reports/detekt.sarif"))
-				// Enable/Disable MD report (default: false)
-				md.required.set(true)
-				md.outputLocation.set(file("build/reports/detekt.md"))
+				config.from(
+					rootProject.files("detekt.yml")
+				)
+			}
+			tasks.withType(Detekt::class.java).configureEach {
+				reports {
+					// Enable/Disable XML report (default: true)
+					xml.required.set(true)
+					xml.outputLocation.set(file("build/reports/detekt.xml"))
+					// Enable/Disable HTML report (default: true)
+					html.required.set(true)
+					html.outputLocation.set(file("build/reports/detekt.html"))
+					// Enable/Disable TXT report (default: true)
+					txt.required.set(false)
+					txt.outputLocation.set(file("build/reports/detekt.txt"))
+					// Enable/Disable SARIF report (default: false)
+					sarif.required.set(false)
+					sarif.outputLocation.set(file("build/reports/detekt.sarif"))
+					// Enable/Disable MD report (default: false)
+					md.required.set(true)
+					md.outputLocation.set(file("build/reports/detekt.md"))
+				}
 			}
 		}
 	}

@@ -9,8 +9,7 @@ import org.gradle.api.tasks.TaskAction
 open class NpmTsGenTask: DefaultTask() {
     @TaskAction
     fun doAction() {
-        project.logger.info("/////////////////////////")
-        project.logger.info("TsGenTask")
+        project.logger.info("[${project.name}]Run NpmTsGenTask...")
         project.rootProject.extensions.fixers?.kt2Ts?.let { config ->
             val cleaning = config.buildCleaningRegex()
             project.logger.info("Cleaning: $cleaning")
