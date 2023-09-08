@@ -52,6 +52,9 @@ afterEvaluate { Project project ->
             'city.smartb.fixers.gradle.publishPluginMarkerMaven'(MavenPublication) {
                 pom.withXml(configurePomMetadata)
             }
+            'city.smartb.fixers.gradle.npmPluginMarkerMaven'(MavenPublication) {
+                pom.withXml(configurePomMetadata)
+            }
             'city.smartb.fixers.gradle.sonarPluginMarkerMaven'(MavenPublication) {
                 pom.withXml(configurePomMetadata)
             }

@@ -3,6 +3,7 @@ package city.smartb.gradle.config
 import city.smartb.gradle.config.model.Bundle
 import city.smartb.gradle.config.model.Jdk
 import city.smartb.gradle.config.model.Kt2Ts
+import city.smartb.gradle.config.model.Npm
 import city.smartb.gradle.config.model.Publication
 import city.smartb.gradle.config.model.Repository
 import city.smartb.gradle.config.model.Sonar
@@ -60,9 +61,13 @@ open abstract class ConfigExtension(
 		version = 17
 	)
 
+	var buildTime: Long = System.currentTimeMillis()
+
 	var repository: Repository = Repository.sonatype(project)
 
 	var publication: Publication? = null
+
+	var npm: Npm = Npm()
 
 	var sonar: Sonar = Sonar.smartB(project)
 
@@ -87,6 +92,10 @@ open abstract class ConfigExtension(
 
 	fun publication(configure: Action<MavenPom>) {
 		publication = Publication(configure)
+	}
+
+	fun npm(configure: Action<Npm>) {
+		configure.execute(npm)
 	}
 
 	fun repository(configure: Action<Repository>) {

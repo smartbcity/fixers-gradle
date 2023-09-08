@@ -3,13 +3,13 @@ package city.smartb.gradle.dependencies
 import org.gradle.api.artifacts.Dependency
 
 object FixersPluginVersions {
-	const val kotlin = "1.9.10"
+	const val kotlin = "1.9.0"
 	const val springBoot = "3.1.2"
 	const val npmPublish = "3.4.1"
 	/**
 	 * com.google.devtools.ksp
 	 */
-	const val ksp = "1.9.10-1.0.13"
+	const val ksp = "1.9.0-1.0.13"
 	/**
 	 * org.graalvm.buildtools.native.gradle.plugin
 	 */

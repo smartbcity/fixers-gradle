@@ -8,6 +8,8 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:${PluginVersions.kotlin}")
 	implementation("org.jetbrains.kotlin:kotlin-compiler-embeddable:${PluginVersions.kotlin}")
 
+	implementation("dev.petuska.npm.publish:dev.petuska.npm.publish.gradle.plugin:${PluginVersions.npmPublish}")
+
 	implementation("io.gitlab.arturbosch.detekt:detekt-gradle-plugin:${PluginVersions.detekt}")
 	implementation("org.jetbrains.dokka:dokka-gradle-plugin:${PluginVersions.dokka}")
 	implementation("org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:${PluginVersions.sonarQube}")
@@ -57,6 +59,13 @@ gradlePlugin {
 			implementationClass = "city.smartb.fixers.gradle.publish.PublishPlugin"
 			displayName = "Fixers Gradle publish"
 			description = "Ease the configuration of maven publication."
+			tags = listOf("SmartB", "Fixers", "kotlin", "mpp", "jvm", "js", "wasm")
+		}
+		create("city.smartb.fixers.gradle.npm") {
+			id = "city.smartb.fixers.gradle.npm"
+			implementationClass = "city.smartb.fixers.gradle.npm.NpmPlugin"
+			displayName = "Fixers Gradle publish npm"
+			description = "Ease the configuration of npm publication."
 			tags = listOf("SmartB", "Fixers", "kotlin", "mpp", "jvm", "js", "wasm")
 		}
 		create("city.smartb.fixers.gradle.sonar") {
