@@ -1,6 +1,8 @@
 package city.smartb.fixers.gradle.sonar
 
 import city.smartb.gradle.config.ConfigExtension
+import city.smartb.gradle.config.fixers
+import io.gitlab.arturbosch.detekt.Detekt
 import io.gitlab.arturbosch.detekt.extensions.DetektExtension
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -13,33 +15,52 @@ import org.sonarqube.gradle.SonarQubeExtension
 
 class SonarPlugin : Plugin<Project> {
 	override fun apply(target: Project) {
-		configureSonarQube(target)
-		target.subprojects {
-			configureJacoco()
-			configureDetekt()
+		target.afterEvaluate {
+			val config = target.rootProject.extensions.fixers
+			configureSonarQube(target)
+			target.subprojects {
+				configureJacoco()
+				if(config?.detekt?.disable != true) {
+					configureDetekt()
+				}
+			}
 		}
+
 	}
 
 	private fun Project.configureDetekt() {
 		plugins.apply("io.gitlab.arturbosch.detekt")
 		extensions.configure(DetektExtension::class.java) {
-			source = files(
-				file("src")
-					.listFiles()
-					?.filter { it.isDirectory && it.name.endsWith("main", ignoreCase = true) }
+			source.from(
+				files(
+					file("src")
+						.listFiles()
+						?.filter { it.isDirectory && it.name.endsWith("main", ignoreCase = true) }
+				)
 			)
-			config = rootProject.files("detekt.yml")
+			config.from(
+				rootProject.files("detekt.yml")
+			)
+		}
+		tasks.withType(Detekt::class.java).configureEach {
 			reports {
-				xml {
-					required.set(true)
-				}
-				html {
-					required.set(true)
-				}
+				// Enable/Disable XML report (default: true)
+				xml.required.set(true)
+				xml.outputLocation.set(file("build/reports/detekt.xml"))
+				// Enable/Disable HTML report (default: true)
+				html.required.set(true)
+				html.outputLocation.set(file("build/reports/detekt.html"))
+				// Enable/Disable TXT report (default: true)
+				txt.required.set(false)
+				txt.outputLocation.set(file("build/reports/detekt.txt"))
+				// Enable/Disable SARIF report (default: false)
+				sarif.required.set(false)
+				sarif.outputLocation.set(file("build/reports/detekt.sarif"))
+				// Enable/Disable MD report (default: false)
+				md.required.set(true)
+				md.outputLocation.set(file("build/reports/detekt.md"))
 			}
 		}
-//		dependencies.add(CONFIGURATION_DETEKT_PLUGINS,
-//			"io.gitlab.arturbosch.detekt:detekt-formatting:${PluginVersions.detekt}")
 	}
 
 	private fun configureSonarQube(target: Project) {

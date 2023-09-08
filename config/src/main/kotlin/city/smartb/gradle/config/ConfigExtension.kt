@@ -1,6 +1,7 @@
 package city.smartb.gradle.config
 
 import city.smartb.gradle.config.model.Bundle
+import city.smartb.gradle.config.model.Detekt
 import city.smartb.gradle.config.model.Jdk
 import city.smartb.gradle.config.model.Kt2Ts
 import city.smartb.gradle.config.model.Npm
@@ -69,6 +70,8 @@ open abstract class ConfigExtension(
 
 	var npm: Npm = Npm()
 
+	var detekt: Detekt = Detekt()
+
 	var sonar: Sonar = Sonar.smartB(project)
 
 	var properties: MutableMap<String, Any> = mutableMapOf()
@@ -96,6 +99,10 @@ open abstract class ConfigExtension(
 
 	fun npm(configure: Action<Npm>) {
 		configure.execute(npm)
+	}
+
+	fun detekt(configure: Action<Detekt>) {
+		configure.execute(detekt)
 	}
 
 	fun repository(configure: Action<Repository>) {
